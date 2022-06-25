@@ -158,10 +158,11 @@ func _input(event):
 
 	if Input.is_action_just_pressed("dive_up"):
 		$Drill.play("Drill_Up")
-		player_depth += 1
+#		player_depth += 1
 	if Input.is_action_just_pressed("dive_down"):
 		$Drill.play("Drill_Down")
 		player_depth -= 1
+		
 		
 	
 	#aim the next drill 
@@ -197,7 +198,7 @@ func break_tile():
 
 
 func _on_Drill_animation_finished():
-	
+	print($Drill.get_animation())
 	if $Drill.get_animation() == "Drill":
 		move_player()
 		$Drill.stop()
@@ -205,9 +206,18 @@ func _on_Drill_animation_finished():
 		$Tile_Crack.stop()
 		$Tile_Crack.set_frame(0)
 	
-	if $Drill.get_animation() == "Drill_Down" or $Drill.get_animation() == "Drill_Up":
+	if $Drill.get_animation() == "Drill_Down":
 		$Drill.play("Drill")
+		$Drill.set_frame(0)
+		$Drill.stop()
+		
+	if $Drill.get_animation() == "Drill_Up":
+		$Drill.play("Drill")
+		$Drill.set_frame(0)
+		$Drill.stop()
+		player_depth += 1
+		pass
 		
 
-func _on_Drill_Hit_Area_area_entered(area):
-	print("Hey")
+#func _on_Drill_Hit_Area_area_entered(area):
+#	print("Hey")
