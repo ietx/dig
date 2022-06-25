@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Drive Down.wav-5e39b9a234aee0994c1d48c4c0531bce.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Fx/Drive Down.wav"
+dest_files=[ "res://.import/Drive Down.wav-5e39b9a234aee0994c1d48c4c0531bce.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

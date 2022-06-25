@@ -10,6 +10,11 @@ var layer1_array = []
 var layer2_array = []
 var layer3_array = []
 
+
+var itens_layer1 = []
+var itens_layer2 = []
+var itens_layer3 = []
+var bombs_number = 12
 #player tile center
 
 var tile_size = Vector2.ZERO
@@ -152,9 +157,12 @@ func _input(event):
 			move_player()
 
 	if Input.is_action_just_pressed("dive_up"):
+		$Drill.play("Drill_Up")
 		player_depth += 1
 	if Input.is_action_just_pressed("dive_down"):
+		$Drill.play("Drill_Down")
 		player_depth -= 1
+		
 	
 	#aim the next drill 
 	
@@ -189,8 +197,17 @@ func break_tile():
 
 
 func _on_Drill_animation_finished():
-	move_player()
-	$Drill.stop()
-	$Drill.set_frame(0)
-	$Tile_Crack.stop()
-	$Tile_Crack.set_frame(0)
+	
+	if $Drill.get_animation() == "Drill":
+		move_player()
+		$Drill.stop()
+		$Drill.set_frame(0)
+		$Tile_Crack.stop()
+		$Tile_Crack.set_frame(0)
+	
+	if $Drill.get_animation() == "Drill_Down" or $Drill.get_animation() == "Drill_Up":
+		$Drill.play("Drill")
+		
+
+func _on_Drill_Hit_Area_area_entered(area):
+	print("Hey")

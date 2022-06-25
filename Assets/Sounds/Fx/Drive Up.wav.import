@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Drive Up.wav-d326e6095400093a17faee4060a62580.sample"
+
+[deps]
+
+source_file="res://Assets/Sounds/Fx/Drive Up.wav"
+dest_files=[ "res://.import/Drive Up.wav-d326e6095400093a17faee4060a62580.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
