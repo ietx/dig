@@ -1,18 +1,26 @@
 extends TileMap
 
 var player_position = Vector2.ZERO
+var player_depth = 0 
 var direction = Vector2.ZERO
 var sonar_array = []
 var layer1_array = []
 
 func _ready():
+	
+	
+	
 	player_position = Vector2(2,2)
 	set_cell(player_position.x, player_position.y, 0)
-	break_tile()
 
 
 	pass # Replace with function body.
-
+func _process(delta):
+	
+	layer1_array = $Layer1.get_used_cells()
+	
+	break_tile()
+	
 func _input(event):
 	
 	if Input.is_action_just_pressed("left"):
@@ -40,6 +48,6 @@ func sonar():
 	sonar_array.append(get_cell(player_position.x - 1, player_position.y - 1))
 	
 func break_tile():
-	layer1_array = $Layer1.get_used_cells()
-	print(layer1_array)
+	if layer1_array.has(player_position):
+		$Layer1.set_cell(player_position.x, player_position.y, -1)
 	
