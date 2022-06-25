@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://player.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://Assets/Drill/DIG_DRILL.png" type="Texture" id=5]
 [ext_resource path="res://Assets/Aim/Tile_Aim_RED.png" type="Texture" id=6]
 [ext_resource path="res://Assets/Aim/Tile_Aim_BLUE.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Crack/Crack_1.png" type="Texture" id=8]
+[ext_resource path="res://clean.png" type="Texture" id=9]
 
 [sub_resource type="TileSet" id=3]
 0/name = "Tile_Floor_Base.png 0"
@@ -132,6 +134,38 @@ animations = [ {
 1/shapes = [  ]
 1/z_index = 0
 
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 8 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 8 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 8 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 8 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 8 )
+region = Rect2( 80, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=18]
+animations = [ {
+"frames": [ ExtResource( 9 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": false,
+"name": "Crack1",
+"speed": 12.0
+} ]
+
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -163,3 +197,9 @@ animation = "Drill"
 tile_set = SubResource( 11 )
 cell_size = Vector2( 16, 16 )
 format = 1
+
+[node name="Tile_Crack" type="AnimatedSprite" parent="."]
+frames = SubResource( 18 )
+animation = "Crack1"
+
+[connection signal="animation_finished" from="Drill" to="." method="_on_Drill_animation_finished"]

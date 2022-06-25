@@ -16,6 +16,8 @@ var player_tile_center = Vector2.ZERO
 
 var first_movement_click = "right"
 
+var aim_tile_center = Vector2.ZERO
+
 const MAX_LAYER_UP = 0
 const MAX_LAYER_DOWN = 2
 
@@ -32,7 +34,10 @@ func _ready():
 func _process(delta):
 	player_tile_center = Vector2((player_position.x * tile_size.x) + tile_size.x/2, (player_position.y * tile_size.y) + tile_size.y/2)
 	$Drill.position = player_tile_center
-	print(first_movement_click)
+
+	aim_tile_center = Vector2((aim_tile.x * tile_size.x) + tile_size.x/2, (aim_tile.y * tile_size.y) + tile_size.y/2)
+	$Tile_Crack.position = aim_tile_center
+#	print(first_movement_click)
 	layer1_array = $Layer1.get_used_cells()
 	layer2_array = $Layer2.get_used_cells()
 	
@@ -40,33 +45,73 @@ func _process(delta):
 	
 	if first_movement_click == "up":
 		$Drill.rotation_degrees = 270
-		
+		$Tile_Crack.rotation_degrees = 270
 		aim_tile = Vector2(player_position.x, player_position.y - 1)
+		$Aim.clear()
+		$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
+		
 	if first_movement_click == "left":
 		$Drill.rotation_degrees = 180
+		$Tile_Crack.rotation_degrees = 180
 		aim_tile = Vector2(player_position.x - 1, player_position.y)
+		$Aim.clear()
+		$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
+		
 	if first_movement_click == "down":
 		$Drill.rotation_degrees = 90
+		$Tile_Crack.rotation_degrees = 90
 		aim_tile = Vector2(player_position.x, player_position.y + 1)
+		$Aim.clear()
+		$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
+		
 	if first_movement_click == "right":
 		$Drill.rotation_degrees = 0
+		$Tile_Crack.rotation_degrees = 0
 		aim_tile = Vector2(player_position.x + 1, player_position.y)
+		$Aim.clear()
+		$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
 		
+	print(aim_tile_center)
+	
 func _input(event):
 	
 	
 	if Input.is_action_just_pressed("left") and first_movement_click == "left":
-		direction = Vector2(-1,0)
-		move_player()
+		if $Layer1.get_cell(aim_tile.x, aim_tile.y) == 0:
+			$Drill.play("Drill")
+			$Tile_Crack.play("Crack1")
+			direction = Vector2(-1,0)
+		elif $Layer1.get_cell(aim_tile.x, aim_tile.y) == 1:
+			direction = Vector2(-1,0)
+			move_player()
+		
 	if Input.is_action_just_pressed("right") and first_movement_click == "right":
-		direction = Vector2(1,0)
-		move_player()
+		if $Layer1.get_cell(aim_tile.x, aim_tile.y) == 0:
+			$Drill.play("Drill")
+			$Tile_Crack.play("Crack1")			
+			direction = Vector2(1,0)
+		elif $Layer1.get_cell(aim_tile.x, aim_tile.y) == 1:
+			direction = Vector2(1,0)
+			move_player()
+
 	if Input.is_action_just_pressed("up") and first_movement_click == "up":
-		direction = Vector2(0,-1)
-		move_player()
+		if $Layer1.get_cell(aim_tile.x, aim_tile.y) == 0:
+			$Drill.play("Drill")
+			$Tile_Crack.play("Crack1")
+			direction = Vector2(0, -1)
+		elif $Layer1.get_cell(aim_tile.x, aim_tile.y) == 1:
+			direction = Vector2(0, -1)
+			move_player()
+			
 	if Input.is_action_just_pressed("down") and first_movement_click == "down":
-		direction = Vector2(0,1)
-		move_player()
+		if $Layer1.get_cell(aim_tile.x, aim_tile.y) == 0:
+			$Drill.play("Drill")
+			$Tile_Crack.play("Crack1")
+			direction = Vector2(0, 1)
+		elif $Layer1.get_cell(aim_tile.x, aim_tile.y) == 1:
+			direction = Vector2(0, 1)
+			move_player()
+
 	if Input.is_action_just_pressed("dive_up"):
 		player_depth += 1
 	if Input.is_action_just_pressed("dive_down"):
@@ -100,3 +145,11 @@ func break_tile():
 	if layer2_array.has(player_position) and player_depth == 2:
 		$Layer2.set_cell(player_position.x, player_position.y, -1)
 	
+
+
+func _on_Drill_animation_finished():
+	move_player()
+	$Drill.stop()
+	$Drill.set_frame(0)
+	$Tile_Crack.stop()
+	$Tile_Crack.set_frame(0)
