@@ -58,7 +58,7 @@ func sonar():
 	
 func break_tile():
 	if layer1_array.has(player_position) and player_depth == 1:
-		$Layer1.set_cell(player_position.x, player_position.y, -1)
+		$Layer1.set_cell(player_position.x, player_position.y, 1)
 	if layer2_array.has(player_position) and player_depth == 2:
 		$Layer2.set_cell(player_position.x, player_position.y, -1)
 	
