@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://player.png" type="Texture" id=2]
@@ -17,6 +17,8 @@
 [ext_resource path="res://Assets/Crack/Crack_3.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Drill/DIG_DRILL_Up.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Drill/DIG_DRILL_Down.png" type="Texture" id=17]
+[ext_resource path="res://Bomb.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Single_Bone.tscn" type="PackedScene" id=19]
 
 [sub_resource type="TileSet" id=25]
 0/name = "Tile_Floor_Top_3.png 0"
@@ -383,6 +385,18 @@ format = 1
 [node name="Tile_Crack" type="AnimatedSprite" parent="."]
 frames = SubResource( 18 )
 animation = "Crack3"
+
+[node name="Itens_Layer1" type="Node2D" parent="."]
+
+[node name="Bomb" parent="Itens_Layer1" instance=ExtResource( 18 )]
+position = Vector2( 40, 8 )
+
+[node name="Single_Bone" parent="Itens_Layer1" instance=ExtResource( 19 )]
+position = Vector2( 24, 24 )
+
+[node name="Itens_Layer2" type="Node2D" parent="."]
+
+[node name="Itens_Layer3" type="Node2D" parent="."]
 
 [connection signal="animation_finished" from="Drill" to="." method="_on_Drill_animation_finished"]
 [connection signal="area_entered" from="Drill/Drill_Hit_Area" to="." method="_on_Drill_Hit_Area_area_entered"]

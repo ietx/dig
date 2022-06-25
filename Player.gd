@@ -54,16 +54,20 @@ func _process(delta):
 		$Layer1.set_visible(true)
 		$Layer2.set_visible(false)
 		$Layer3.set_visible(false)
+		$Itens_Layer1.position = Vector2(0, 0)
+		
 	elif player_depth == 1:
 		depth_layer_node = $Layer2
 		$Layer1.set_visible(false)
 		$Layer2.set_visible(true)
 		$Layer3.set_visible(false)
+		$Itens_Layer1.position = Vector2(0, -500)
 	if player_depth == 2:
 		depth_layer_node = $Layer3
 		$Layer1.set_visible(false)
 		$Layer2.set_visible(false)
 		$Layer3.set_visible(true)
+		$Itens_Layer1.position = Vector2(0, -500)
 	
 	break_tile()
 	
@@ -95,7 +99,7 @@ func _process(delta):
 		$Aim.clear()
 		$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
 		
-	print(player_depth)
+#	print(player_depth)
 	
 func _input(event):
 	
@@ -219,5 +223,6 @@ func _on_Drill_animation_finished():
 		pass
 		
 
-#func _on_Drill_Hit_Area_area_entered(area):
-#	print("Hey")
+func _on_Drill_Hit_Area_area_entered(area):
+	if area.name == "Single_Bone":
+		area.queue_free()
