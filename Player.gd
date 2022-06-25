@@ -8,6 +8,7 @@ var aim_tile = Vector2.ZERO
 var sonar_array = []
 var layer1_array = []
 var layer2_array = []
+var layer3_array = []
 
 #player tile center
 
@@ -18,6 +19,7 @@ var first_movement_click = "right"
 
 var aim_tile_center = Vector2.ZERO
 
+var depth_layer_node
 const MAX_LAYER_UP = 0
 const MAX_LAYER_DOWN = 2
 
@@ -40,6 +42,23 @@ func _process(delta):
 #	print(first_movement_click)
 	layer1_array = $Layer1.get_used_cells()
 	layer2_array = $Layer2.get_used_cells()
+	layer3_array = $Layer3.get_used_cells()
+	
+	if player_depth == 0:
+		depth_layer_node = $Layer1
+		$Layer1.set_visible(true)
+		$Layer2.set_visible(false)
+		$Layer3.set_visible(false)
+	elif player_depth == 1:
+		depth_layer_node = $Layer2
+		$Layer1.set_visible(false)
+		$Layer2.set_visible(true)
+		$Layer3.set_visible(false)
+	if player_depth == 2:
+		depth_layer_node = $Layer3
+		$Layer1.set_visible(false)
+		$Layer2.set_visible(false)
+		$Layer3.set_visible(true)
 	
 	break_tile()
 	
@@ -71,44 +90,64 @@ func _process(delta):
 		$Aim.clear()
 		$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
 		
-	print(aim_tile_center)
+	print(player_depth)
 	
 func _input(event):
 	
 	
 	if Input.is_action_just_pressed("left") and first_movement_click == "left":
-		if $Layer1.get_cell(aim_tile.x, aim_tile.y) == 0:
+		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
 			$Drill.play("Drill")
-			$Tile_Crack.play("Crack1")
+			if player_depth == 0:
+				$Tile_Crack.play("Crack1")
+			elif player_depth == 1:
+				$Tile_Crack.play("Crack2")
+			elif player_depth == 2:
+				$Tile_Crack.play("Crack3")
 			direction = Vector2(-1,0)
-		elif $Layer1.get_cell(aim_tile.x, aim_tile.y) == 1:
+		elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
 			direction = Vector2(-1,0)
 			move_player()
 		
 	if Input.is_action_just_pressed("right") and first_movement_click == "right":
-		if $Layer1.get_cell(aim_tile.x, aim_tile.y) == 0:
+		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
 			$Drill.play("Drill")
-			$Tile_Crack.play("Crack1")			
+			if player_depth == 0:
+				$Tile_Crack.play("Crack1")
+			elif player_depth == 1:
+				$Tile_Crack.play("Crack2")
+			elif player_depth == 2:
+				$Tile_Crack.play("Crack3")
 			direction = Vector2(1,0)
-		elif $Layer1.get_cell(aim_tile.x, aim_tile.y) == 1:
+		elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
 			direction = Vector2(1,0)
 			move_player()
 
 	if Input.is_action_just_pressed("up") and first_movement_click == "up":
-		if $Layer1.get_cell(aim_tile.x, aim_tile.y) == 0:
+		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
 			$Drill.play("Drill")
-			$Tile_Crack.play("Crack1")
+			if player_depth == 0:
+				$Tile_Crack.play("Crack1")
+			elif player_depth == 1:
+				$Tile_Crack.play("Crack2")
+			elif player_depth == 2:
+				$Tile_Crack.play("Crack3")
 			direction = Vector2(0, -1)
-		elif $Layer1.get_cell(aim_tile.x, aim_tile.y) == 1:
+		elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
 			direction = Vector2(0, -1)
 			move_player()
 			
 	if Input.is_action_just_pressed("down") and first_movement_click == "down":
-		if $Layer1.get_cell(aim_tile.x, aim_tile.y) == 0:
+		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
 			$Drill.play("Drill")
-			$Tile_Crack.play("Crack1")
+			if player_depth == 0:
+				$Tile_Crack.play("Crack1")
+			elif player_depth == 1:
+				$Tile_Crack.play("Crack2")
+			elif player_depth == 2:
+				$Tile_Crack.play("Crack3")
 			direction = Vector2(0, 1)
-		elif $Layer1.get_cell(aim_tile.x, aim_tile.y) == 1:
+		elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
 			direction = Vector2(0, 1)
 			move_player()
 
@@ -142,8 +181,10 @@ func sonar():
 func break_tile():
 	if layer1_array.has(player_position) and player_depth == 0:
 		$Layer1.set_cell(player_position.x, player_position.y, 1)
-	if layer2_array.has(player_position) and player_depth == 2:
-		$Layer2.set_cell(player_position.x, player_position.y, -1)
+	if layer2_array.has(player_position) and player_depth == 1:
+		$Layer2.set_cell(player_position.x, player_position.y, 1)
+	if layer3_array.has(player_position) and player_depth == 2:
+		$Layer3.set_cell(player_position.x, player_position.y, 1)
 	
 
 
