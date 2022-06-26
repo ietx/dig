@@ -46,6 +46,9 @@ const MAX_LAYER_UP = 0
 const MAX_LAYER_DOWN = 2
 
 func _ready():
+	$HUD/Itens.text = String(score)
+	$HUD/Lifes.text = String(life)
+	
 	depth_layer_node = $Layer1
 	tile_size = $PlayerLayer.get_cell_size()
 	
@@ -104,28 +107,7 @@ func _process(delta):
 	layer2_array = $Layer2.get_used_cells()
 	layer3_array = $Layer3.get_used_cells()
 	
-#	if player_depth == 0:
-#		depth_layer_node = $Layer1
-#		$Layer1.set_visible(true)
-#		$Layer2.set_visible(false)
-#		$Layer3.set_visible(false)
-#
-#
-#	elif player_depth == 1:
-#		depth_layer_node = $Layer2
-#		$Layer1.set_visible(false)
-#		$Layer2.set_visible(true)
-#		$Layer3.set_visible(false)
-#
-#
-#		hide_layer1_itens()
-#
-#	if player_depth == 2:
-#		depth_layer_node = $Layer3
-#		$Layer1.set_visible(false)
-#		$Layer2.set_visible(false)
-#		$Layer3.set_visible(true)
-#
+
 	
 	break_tile()
 	
@@ -158,11 +140,26 @@ func _process(delta):
 		$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
 		
 #	print(player_depth)
-	
+
 func _input(event):
 	
 	
 	if Input.is_action_just_pressed("left") and first_movement_click == "left":
+		
+		if player_depth == 0:
+			for i in itens_layer1:
+				if aim_tile == i[0]:
+					i[1].set_visible(true)
+		elif player_depth == 1:
+			for i in itens_layer2:
+				if aim_tile == i[0]:
+					i[1].set_visible(true)
+		elif player_depth == 2:
+			for i in itens_layer3:
+				if aim_tile == i[0]:
+					i[1].set_visible(true)
+			
+		
 		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
 			$Drill.play("Drill")
 			if player_depth == 0:
@@ -178,6 +175,20 @@ func _input(event):
 			
 		
 	if Input.is_action_just_pressed("right") and first_movement_click == "right":
+		
+		if player_depth == 0:
+			for i in itens_layer1:
+				if aim_tile == i[0]:
+					i[1].set_visible(true)
+		elif player_depth == 1:
+			for i in itens_layer2:
+				if aim_tile == i[0]:
+					i[1].set_visible(true)
+		elif player_depth == 2:
+			for i in itens_layer3:
+				if aim_tile == i[0]:
+					i[1].set_visible(true)
+		
 		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
 			$Drill.play("Drill")
 			if player_depth == 0:
@@ -193,6 +204,20 @@ func _input(event):
 			
 
 	if Input.is_action_just_pressed("up") and first_movement_click == "up":
+		
+		if player_depth == 0:
+			for i in itens_layer1:
+				if aim_tile == i[0]:
+					i[1].set_visible(true)
+		elif player_depth == 1:
+			for i in itens_layer2:
+				if aim_tile == i[0]:
+					i[1].set_visible(true)
+		elif player_depth == 2:
+			for i in itens_layer3:
+				if aim_tile == i[0]:
+					i[1].set_visible(true)
+		
 		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
 			$Drill.play("Drill")
 			if player_depth == 0:
@@ -208,6 +233,20 @@ func _input(event):
 			
 			
 	if Input.is_action_just_pressed("down") and first_movement_click == "down":
+		
+		if player_depth == 0:
+			for i in itens_layer1:
+				if aim_tile == i[0]:
+					i[1].set_visible(true)
+		elif player_depth == 1:
+			for i in itens_layer2:
+				if aim_tile == i[0]:
+					i[1].set_visible(true)
+		elif player_depth == 2:
+			for i in itens_layer3:
+				if aim_tile == i[0]:
+					i[1].set_visible(true)
+		
 		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
 			$Drill.play("Drill")
 			if player_depth == 0:
@@ -388,12 +427,13 @@ func _on_Drill_Hit_Area_area_entered(area):
 	
 	if area.is_in_group("bones"):
 		score += 1
-		print(score)
+		$HUD/Itens.text = String(score)
+	
 		area.queue_free()
 	
 	if area.is_in_group("bomb"):
 		life -= 1
-		print(life)
+		$HUD/Lifes.text = String(life)
 
 func choose(array):
 	return array[randi() % array.size()]	
@@ -455,6 +495,7 @@ func random_itens_in_quadrant(arrayx,arrayy):
 	
 	object.position.x = Q1_choose_position.x * tile_size.x + tile_size.x/2
 	object.position.y = Q1_choose_position.y * tile_size.y + tile_size.y/2
+#	object.set_visible(true)
 #	print(object.get_global_position())
 #	print(all_itens.size())
 #	print(object)
@@ -473,6 +514,7 @@ func random_itens_in_quadrant(arrayx,arrayy):
 		last_object.position = tile_size/Vector2(2,2)
 	else:
 		last_object.position = last_Q1_choose_position * tile_size + tile_size/ Vector2(2,2)
+#		last_object.set_visible(false)
 #	print(all_itens.size())
 #	print(last_object)
 	
