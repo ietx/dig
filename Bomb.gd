@@ -21,6 +21,8 @@ func _on_Bomb_area_entered(area):
 
 
 func _on_AnimatedSprite_animation_finished():
+	if get_parent().life <= 0:
+		get_parent().you_loose()
 	if $AnimatedSprite.get_animation() == "Explode":
 		queue_free()
 	

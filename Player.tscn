@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=2]
+[gd_scene load_steps=100 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://player.png" type="Texture" id=2]
@@ -25,6 +25,13 @@
 [ext_resource path="res://Assets/Menus/Win_Menu/Win_Menu2.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Menus/Win_Menu/Win_Menu3.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Radar/Radar.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Picareta/DIG_Picareta.png" type="Texture" id=26]
+[ext_resource path="res://Assets/HUB/DIG_Hub_BASE.png" type="Texture" id=27]
+[ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level1.png" type="Texture" id=28]
+[ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level2.png" type="Texture" id=29]
+[ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level3.png" type="Texture" id=30]
+[ext_resource path="res://Assets/HUB/DIG_Hub_Tool2.png" type="Texture" id=31]
+[ext_resource path="res://Assets/HUB/DIG_Hub_Tool1.png" type="Texture" id=32]
 
 [sub_resource type="TileSet" id=25]
 0/name = "Tile_Floor_Top_3.png 0"
@@ -377,6 +384,38 @@ animations = [ {
 "speed": 12.0
 } ]
 
+[sub_resource type="AtlasTexture" id=58]
+atlas = ExtResource( 26 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=59]
+atlas = ExtResource( 26 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=60]
+atlas = ExtResource( 26 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=61]
+atlas = ExtResource( 26 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=62]
+atlas = ExtResource( 26 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=63]
+atlas = ExtResource( 26 )
+region = Rect2( 80, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=64]
+animations = [ {
+"frames": [ SubResource( 58 ), SubResource( 59 ), SubResource( 60 ), SubResource( 61 ), SubResource( 62 ), SubResource( 63 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
 [sub_resource type="DynamicFont" id=45]
 font_data = ExtResource( 18 )
 
@@ -387,6 +426,9 @@ font_data = ExtResource( 18 )
 font_data = ExtResource( 18 )
 
 [sub_resource type="DynamicFont" id=48]
+font_data = ExtResource( 18 )
+
+[sub_resource type="DynamicFont" id=65]
 font_data = ExtResource( 18 )
 
 [sub_resource type="SpriteFrames" id=49]
@@ -422,6 +464,37 @@ animations = [ {
 "frames": [ ExtResource( 20 ) ],
 "loop": true,
 "name": "Retry",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=66]
+animations = [ {
+"frames": [ ExtResource( 29 ) ],
+"loop": false,
+"name": "Floor2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 30 ) ],
+"loop": false,
+"name": "Floor3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 28 ) ],
+"loop": false,
+"name": "Floor1",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=67]
+animations = [ {
+"frames": [ ExtResource( 32 ) ],
+"loop": true,
+"name": "Drill",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 31 ) ],
+"loop": true,
+"name": "Pica",
 "speed": 5.0
 } ]
 
@@ -466,6 +539,7 @@ shape = SubResource( 32 )
 [node name="Sonar" type="AnimatedSprite" parent="Drill"]
 frames = SubResource( 57 )
 animation = "On"
+frame = 5
 playing = true
 
 [node name="Player_Tile_Center" type="Position2D" parent="."]
@@ -479,12 +553,10 @@ format = 1
 frames = SubResource( 18 )
 animation = "Crack3"
 
-[node name="Itens_Layer1" type="Node2D" parent="."]
-position = Vector2( -25, 23 )
-
-[node name="Itens_Layer2" type="Node2D" parent="."]
-
-[node name="Itens_Layer3" type="Node2D" parent="."]
+[node name="Pica" type="AnimatedSprite" parent="."]
+frames = SubResource( 64 )
+frame = 2
+playing = true
 
 [node name="HUD" type="Control" parent="."]
 margin_right = 40.0
@@ -492,6 +564,11 @@ margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HUD_Base" type="Sprite" parent="HUD"]
+position = Vector2( 144, 1 )
+texture = ExtResource( 27 )
+centered = false
 
 [node name="Bomb" type="Label" parent="HUD"]
 margin_left = 157.0
@@ -537,6 +614,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Pica_Remains" type="Label" parent="HUD"]
+margin_left = 196.0
+margin_top = 116.0
+margin_right = 236.0
+margin_bottom = 132.0
+custom_colors/font_color = Color( 0.12549, 0.898039, 0.0588235, 1 )
+custom_fonts/font = SubResource( 65 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="You_Loose" type="AnimatedSprite" parent="HUD"]
 visible = false
 position = Vector2( 72, 72 )
@@ -549,5 +638,16 @@ position = Vector2( 72, 72 )
 frames = SubResource( 50 )
 animation = "Menu"
 
+[node name="Floors" type="AnimatedSprite" parent="HUD"]
+position = Vector2( 144, 0 )
+frames = SubResource( 66 )
+animation = "Floor2"
+centered = false
+
+[node name="Tool" type="AnimatedSprite" parent="HUD"]
+frames = SubResource( 67 )
+animation = "Pica"
+
 [connection signal="animation_finished" from="Drill" to="." method="_on_Drill_animation_finished"]
 [connection signal="area_entered" from="Drill/Drill_Hit_Area" to="." method="_on_Drill_Hit_Area_area_entered"]
+[connection signal="animation_finished" from="Tile_Crack" to="." method="_on_Tile_Crack_animation_finished"]

@@ -1,5 +1,10 @@
 extends Node2D
 
+var cursor_you_loose = 0 
+
+var can_move = true
+
+var end_game = "No_End" 
 var player_position = Vector2.ZERO
 var player_depth = 0 
 var direction = Vector2.ZERO
@@ -10,6 +15,7 @@ var bombs_in_sonar_range = 0
 var bones_in_sonar_range = 0
 
 var current_tool = "Drill"
+var pica_using_times = 10
 
 
 var layer1_array = []
@@ -48,6 +54,7 @@ const MAX_LAYER_UP = 0
 const MAX_LAYER_DOWN = 2
 
 func _ready():
+
 	$HUD/Itens.text = String(score)
 	$HUD/Lifes.text = String(life)
 	
@@ -99,6 +106,20 @@ func _ready():
 
 	pass # Replace with function body.
 func _process(delta):
+	
+	if player_depth == 0:
+		$HUD/Floors.play("Floor1")
+	if player_depth == 1:
+		$HUD/Floors.play("Floor2")
+	if player_depth == 2:
+		$HUD/Floors.play("Floor3")
+	if pica_using_times <= 0:
+			current_tool = "Drill"
+				
+	$HUD/Pica_Remains.text = String(pica_using_times)
+	if score >= 10:
+		you_win()
+	
 	print(current_tool)
 	player_tile_center = Vector2((player_position.x * tile_size.x) + tile_size.x/2, (player_position.y * tile_size.y) + tile_size.y/2)
 	$Drill.position = player_tile_center
@@ -113,6 +134,14 @@ func _process(delta):
 
 	
 	break_tile()
+	
+	$Pica.position = aim_tile * tile_size + tile_size/Vector2(2,2)
+	
+	if current_tool == "Pica":
+		$Pica.set_visible(true)
+	elif current_tool == "Drill":
+		$Pica.set_visible(false)
+	
 	
 	if first_movement_click == "up":
 		$Drill.rotation_degrees = 270
@@ -158,191 +187,250 @@ func _process(delta):
 
 func _input(event):
 	
-	
-	if Input.is_action_just_pressed("left") and first_movement_click == "left":
-		
-		
-		if player_depth == 0:
-			for i in itens_layer1:
-				if aim_tile == i[0]:
-					i[1].set_visible(true)
-		elif player_depth == 1:
-			for i in itens_layer2:
-				if aim_tile == i[0]:
-					i[1].set_visible(true)
-		elif player_depth == 2:
-			for i in itens_layer3:
-				if aim_tile == i[0]:
-					i[1].set_visible(true)
+	if can_move == true and end_game == "No_End":
+		if Input.is_action_just_pressed("left") and first_movement_click == "left":
+			can_move = false
 			
-		
-		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
-			$Drill.play("Drill")
 			if player_depth == 0:
-				$Tile_Crack.play("Crack1")
+				for i in itens_layer1:
+					if aim_tile == i[0]:
+						i[1].set_visible(true)
 			elif player_depth == 1:
-				$Tile_Crack.play("Crack2")
+				for i in itens_layer2:
+					if aim_tile == i[0]:
+						i[1].set_visible(true)
 			elif player_depth == 2:
-				$Tile_Crack.play("Crack3")
-			direction = Vector2(-1,0)
-		elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
-			direction = Vector2(-1,0)
-			move_player()
+				for i in itens_layer3:
+					if aim_tile == i[0]:
+						i[1].set_visible(true)
+				
 			
-		
-	if Input.is_action_just_pressed("right") and first_movement_click == "right":
-		
-		if player_depth == 0:
-			for i in itens_layer1:
-				if aim_tile == i[0]:
-					i[1].set_visible(true)
-		elif player_depth == 1:
-			for i in itens_layer2:
-				if aim_tile == i[0]:
-					i[1].set_visible(true)
-		elif player_depth == 2:
-			for i in itens_layer3:
-				if aim_tile == i[0]:
-					i[1].set_visible(true)
-		
-		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
+			if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
+				$Drill.play("Drill")
+				if player_depth == 0:
+					$Tile_Crack.play("Crack1")
+				elif player_depth == 1:
+					$Tile_Crack.play("Crack2")
+				elif player_depth == 2:
+					$Tile_Crack.play("Crack3")
+				direction = Vector2(-1,0)
+			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
+				direction = Vector2(-1,0)
+				move_player()
+				
 			
-			$Drill.play("Drill")
+		if Input.is_action_just_pressed("right") and first_movement_click == "right":
+			can_move = false
+			
 			if player_depth == 0:
-				$Tile_Crack.play("Crack1")
+				for i in itens_layer1:
+					if aim_tile == i[0]:
+						i[1].set_visible(true)
 			elif player_depth == 1:
-				$Tile_Crack.play("Crack2")
+				for i in itens_layer2:
+					if aim_tile == i[0]:
+						i[1].set_visible(true)
 			elif player_depth == 2:
-				$Tile_Crack.play("Crack3")
-			direction = Vector2(1,0)
-		elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
-			direction = Vector2(1,0)
-			move_player()
+				for i in itens_layer3:
+					if aim_tile == i[0]:
+						i[1].set_visible(true)
+			
+			if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
+				
+				$Drill.play("Drill")
+				if player_depth == 0:
+					$Tile_Crack.play("Crack1")
+				elif player_depth == 1:
+					$Tile_Crack.play("Crack2")
+				elif player_depth == 2:
+					$Tile_Crack.play("Crack3")
+				direction = Vector2(1,0)
+			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
+				direction = Vector2(1,0)
+				move_player()
+				
+
+		if Input.is_action_just_pressed("up") and first_movement_click == "up":
+			can_move = false
+			if player_depth == 0:
+				for i in itens_layer1:
+					if aim_tile == i[0]:
+						i[1].set_visible(true)
+			elif player_depth == 1:
+				for i in itens_layer2:
+					if aim_tile == i[0]:
+						i[1].set_visible(true)
+			elif player_depth == 2:
+				for i in itens_layer3:
+					if aim_tile == i[0]:
+						i[1].set_visible(true)
+			
+			if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
+				$Drill.play("Drill")
+				if player_depth == 0:
+					$Tile_Crack.play("Crack1")
+				elif player_depth == 1:
+					$Tile_Crack.play("Crack2")
+				elif player_depth == 2:
+					$Tile_Crack.play("Crack3")
+				direction = Vector2(0, -1)
+			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
+				direction = Vector2(0, -1)
+				move_player()
+				
+				
+		if Input.is_action_just_pressed("down") and first_movement_click == "down":
+			can_move = false
+			
+			if player_depth == 0:
+				for i in itens_layer1:
+					if aim_tile == i[0]:
+						i[1].set_visible(true)
+			elif player_depth == 1:
+				for i in itens_layer2:
+					if aim_tile == i[0]:
+						i[1].set_visible(true)
+			elif player_depth == 2:
+				for i in itens_layer3:
+					if aim_tile == i[0]:
+						i[1].set_visible(true)
+			
+			if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
+				$Drill.play("Drill")
+				if player_depth == 0:
+					$Tile_Crack.play("Crack1")
+				elif player_depth == 1:
+					$Tile_Crack.play("Crack2")
+				elif player_depth == 2:
+					$Tile_Crack.play("Crack3")
+				direction = Vector2(0, 1)
+			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
+				direction = Vector2(0, 1)
+				move_player()
+				
+
+		if Input.is_action_just_pressed("dive_up")and player_depth < 2:
+			can_move = false
+			$Drill.play("Drill_Up")
+			
+	#		player_depth += 1
+		if Input.is_action_just_pressed("dive_down") and player_depth > 0:
+			can_move = false
+			
+			$Drill.play("Drill_Down")
+			player_depth -= 1
 			
 
-	if Input.is_action_just_pressed("up") and first_movement_click == "up":
-		
-		if player_depth == 0:
-			for i in itens_layer1:
-				if aim_tile == i[0]:
-					i[1].set_visible(true)
-		elif player_depth == 1:
-			for i in itens_layer2:
-				if aim_tile == i[0]:
-					i[1].set_visible(true)
-		elif player_depth == 2:
-			for i in itens_layer3:
-				if aim_tile == i[0]:
-					i[1].set_visible(true)
-		
-		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
-			$Drill.play("Drill")
+			can_move = true
+			update_sonar()
+			itens_around()
+			
 			if player_depth == 0:
-				$Tile_Crack.play("Crack1")
+				depth_layer_node = $Layer1
+				$Layer1.set_visible(true)
+				$Layer2.set_visible(false)
+				$Layer3.set_visible(false)
+				
+				show_layer1_itens()
+				hide_layer2_itens()
+				hide_layer3_itens()
+				
 			elif player_depth == 1:
-				$Tile_Crack.play("Crack2")
-			elif player_depth == 2:
-				$Tile_Crack.play("Crack3")
-			direction = Vector2(0, -1)
-		elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
-			direction = Vector2(0, -1)
-			move_player()
+				depth_layer_node = $Layer2
+				$Layer1.set_visible(false)
+				$Layer2.set_visible(true)
+				$Layer3.set_visible(false)
+				
+				hide_layer1_itens()
+				show_layer2_itens()
+				hide_layer3_itens()
+				
+				
+				
+			if player_depth == 2:
+				depth_layer_node = $Layer3
+				$Layer1.set_visible(false)
+				$Layer2.set_visible(false)
+				$Layer3.set_visible(true)
+				
+				hide_layer1_itens()
+				hide_layer2_itens()
+				show_layer3_itens()
 			
-			
-	if Input.is_action_just_pressed("down") and first_movement_click == "down":
 		
-		if player_depth == 0:
-			for i in itens_layer1:
-				if aim_tile == i[0]:
-					i[1].set_visible(true)
-		elif player_depth == 1:
-			for i in itens_layer2:
-				if aim_tile == i[0]:
-					i[1].set_visible(true)
-		elif player_depth == 2:
-			for i in itens_layer3:
-				if aim_tile == i[0]:
-					i[1].set_visible(true)
+			
+			
 		
-		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
-			$Drill.play("Drill")
-			if player_depth == 0:
-				$Tile_Crack.play("Crack1")
-			elif player_depth == 1:
-				$Tile_Crack.play("Crack2")
-			elif player_depth == 2:
-				$Tile_Crack.play("Crack3")
-			direction = Vector2(0, 1)
-		elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
-			direction = Vector2(0, 1)
-			move_player()
-			
-
-	if Input.is_action_just_pressed("dive_up"):
-		$Drill.play("Drill_Up")
+		#aim the next drill 
 		
-#		player_depth += 1
-	if Input.is_action_just_pressed("dive_down"):
+		if Input.is_action_just_pressed("left"):
+			first_movement_click = "left"
+		if Input.is_action_just_pressed("right"):
+			first_movement_click = "right"
+		if Input.is_action_just_pressed("up"):
+			first_movement_click = "up"
+		if Input.is_action_just_pressed("down"):
+			first_movement_click = "down"
+			
 		
-		$Drill.play("Drill_Down")
-		player_depth -= 1
-		update_sonar()
-		itens_around()
-		
-		if player_depth == 0:
-			depth_layer_node = $Layer1
-			$Layer1.set_visible(true)
-			$Layer2.set_visible(false)
-			$Layer3.set_visible(false)
+		if Input.is_action_just_pressed("Tool"):
 			
-			show_layer1_itens()
-			hide_layer2_itens()
-			hide_layer3_itens()
-			
-		elif player_depth == 1:
-			depth_layer_node = $Layer2
-			$Layer1.set_visible(false)
-			$Layer2.set_visible(true)
-			$Layer3.set_visible(false)
-			
-			hide_layer1_itens()
-			show_layer2_itens()
-			hide_layer3_itens()
-			
-			
-			
-		if player_depth == 2:
-			depth_layer_node = $Layer3
-			$Layer1.set_visible(false)
-			$Layer2.set_visible(false)
-			$Layer3.set_visible(true)
-			
-			hide_layer1_itens()
-			hide_layer2_itens()
-			show_layer3_itens()
-		
+			if pica_using_times <= 0:
+				current_tool = "Drill"
+			else:
+				if current_tool == "Drill":
+					current_tool = "Pica"
+				elif current_tool == "Pica":
+					current_tool = "Drill"
 	
+	elif end_game == "Loose": #cant move
+		if cursor_you_loose == 0:
+			$HUD/You_Loose.play("Retry")
+			if Input.is_action_just_pressed("Enter"):
+				get_tree().reload_current_scene()
+		if cursor_you_loose == 1:
+			$HUD/You_Loose.play("Menu")
+			if Input.is_action_just_pressed("Enter"):
+				get_tree().change_scene("res://player.png")
+		if cursor_you_loose == 2:
+			$HUD/You_Loose.play("Quit")
+			if Input.is_action_just_pressed("Enter"):
+				get_tree().quit()
 		
 		
+		if Input.is_action_just_pressed("left"):
+			cursor_you_loose -= 1
+			cursor_you_loose = clamp(cursor_you_loose, 0, 2)
+			
+			$HUD/You_Loose.play()
+		if Input.is_action_just_pressed("right"):
+			cursor_you_loose += 1
+			cursor_you_loose = clamp(cursor_you_loose, 0, 2)
 	
-	#aim the next drill 
+	elif end_game == "Win": #cant move
+		if cursor_you_loose == 0:
+			$HUD/You_Win.play("Retry")
+			if Input.is_action_just_pressed("Enter"):
+				get_tree().reload_current_scene()
+		if cursor_you_loose == 1:
+			$HUD/You_Win.play("Menu")
+			if Input.is_action_just_pressed("Enter"):
+				get_tree().change_scene("res://player.png")
+		if cursor_you_loose == 2:
+			$HUD/You_Win.play("Quit")
+			if Input.is_action_just_pressed("Enter"):
+				get_tree().quit()
+		if Input.is_action_just_pressed("left"):
+			cursor_you_loose -= 1
+			cursor_you_loose = clamp(cursor_you_loose, 0, 2)
+			
+			$HUD/You_Loose.play()
+		if Input.is_action_just_pressed("right"):
+			cursor_you_loose += 1
+			cursor_you_loose = clamp(cursor_you_loose, 0, 2)
 	
-	if Input.is_action_just_pressed("left"):
-		first_movement_click = "left"
-	if Input.is_action_just_pressed("right"):
-		first_movement_click = "right"
-	if Input.is_action_just_pressed("up"):
-		first_movement_click = "up"
-	if Input.is_action_just_pressed("down"):
-		first_movement_click = "down"
-		
-	
-	if Input.is_action_just_pressed("Tool"):
-	
-		if current_tool == "Drill":
-			current_tool = "Pica"
-		elif current_tool == "Pica":
-			current_tool = "Drill"
+	elif can_move == false:
+		pass
 
 func move_player():
 	$PlayerLayer.set_cell(player_position.x, player_position.y, -1)
@@ -351,6 +439,7 @@ func move_player():
 	direction = Vector2.ZERO
 	update_sonar()
 	itens_around()
+	can_move = true
 	
 func update_sonar():
 	bombs_in_sonar_range = 0
@@ -389,6 +478,9 @@ func _on_Drill_animation_finished():
 	if $Drill.get_animation() == "Drill":
 		if current_tool == "Drill":
 			move_player()
+		elif current_tool == "Pica":
+			can_move = true
+			pica_using_times -= 1
 		$Drill.stop()
 		$Drill.set_frame(0)
 		$Tile_Crack.stop()
@@ -404,6 +496,7 @@ func _on_Drill_animation_finished():
 		$Drill.set_frame(0)
 		$Drill.stop()
 		player_depth += 1
+		can_move = true
 		update_sonar()
 		itens_around()
 		
@@ -626,3 +719,13 @@ func itens_around():
 		$HUD/Bomb.text = String(bombs_in_sonar_range)
 		$HUD/Bone.text = String(bones_in_sonar_range)
 		
+func you_loose():
+	end_game = "Loose"
+	$HUD/You_Loose.set_visible(true)
+
+func you_win():
+	end_game = "Win"
+	$HUD/You_Win.set_visible(true)
+	
+
+
