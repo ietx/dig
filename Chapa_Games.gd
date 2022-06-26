@@ -18,4 +18,4 @@ func _ready():
 
 func _on_VideoPlayer_finished():
 	$"/root/MusicController/Intro".play()
-	get_tree().change_scene("res://Player.tscn")
+	get_tree().change_scene("res://Menu.tscn")

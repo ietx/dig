@@ -190,9 +190,6 @@ func _process(delta):
 
 func _input(event):
 	
-	if Input.is_action_just_pressed("exit_game"):
-		get_tree().quit()
-		
 	if can_move == true and end_game == "No_End":
 		if Input.is_action_just_pressed("left") and first_movement_click == "left":
 			
@@ -433,7 +430,7 @@ func _input(event):
 			$HUD/You_Loose.play("Menu")
 			if Input.is_action_just_pressed("Enter"):
 				$FX/Control_Enter.play()
-				get_tree().change_scene("res://player.png")
+				get_tree().change_scene("res://Menu.tscn")
 		if cursor_you_loose == 2:
 			$HUD/You_Loose.play("Quit")
 			if Input.is_action_just_pressed("Enter"):
@@ -462,7 +459,7 @@ func _input(event):
 			$HUD/You_Win.play("Menu")
 			if Input.is_action_just_pressed("Enter"):
 				$FX/Control_Enter.play()
-				get_tree().change_scene("res://player.png")
+				get_tree().change_scene("res://Menu.tscn")
 		if cursor_you_loose == 2:
 			$HUD/You_Win.play("Quit")
 			if Input.is_action_just_pressed("Enter"):

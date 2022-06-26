@@ -565,7 +565,7 @@ animation = "Crack3"
 
 [node name="Pica" type="AnimatedSprite" parent="."]
 frames = SubResource( 64 )
-frame = 4
+frame = 3
 playing = true
 
 [node name="HUD" type="Control" parent="."]

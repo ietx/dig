@@ -1,0 +1,250 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Menu.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Font/FreePixel.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Assets/Menus/Loose_Menu/Loose_Menu2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Menus/Win_Menu/Win_Menu1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Menus/Loose_Menu/Loose_Menu3.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Menus/Loose_Menu/Loose_Menu1.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Tiles_Floor/Tile_Floor_Top.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Tiles_Floor/Tile_Floor_Base.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Menus/Win_Menu/Win_Menu2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Menus/Win_Menu/Win_Menu3.png" type="Texture" id=10]
+[ext_resource path="res://Assets/HUB/DIG_Hub_Tool2.png" type="Texture" id=11]
+[ext_resource path="res://Assets/HUB/DIG_Hub_Tool1.png" type="Texture" id=12]
+[ext_resource path="res://Assets/HUB/DIG_Hub_BASE.png" type="Texture" id=13]
+[ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level1.png" type="Texture" id=14]
+[ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level2.png" type="Texture" id=15]
+[ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level3.png" type="Texture" id=16]
+
+[sub_resource type="TileSet" id=1]
+0/name = "Tile_Floor_Top.png 0"
+0/texture = ExtResource( 7 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+1/name = "Tile_Floor_Base.png 1"
+1/texture = ExtResource( 8 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 16, 16 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 2 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Menu",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "Quit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "Retry",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "Menu",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "Quit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "Retry",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ ExtResource( 15 ) ],
+"loop": false,
+"name": "Floor2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": false,
+"name": "Floor3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": false,
+"name": "Floor1",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "Drill",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "Pica",
+"speed": 5.0
+} ]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Layer1" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0 )
+
+[node name="HUD" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HUD_Base" type="Sprite" parent="HUD"]
+position = Vector2( 144, 0 )
+texture = ExtResource( 13 )
+centered = false
+
+[node name="Bomb" type="Label" parent="HUD"]
+margin_left = 224.0
+margin_top = 39.0
+margin_right = 264.0
+margin_bottom = 55.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bone" type="Label" parent="HUD"]
+margin_left = 199.0
+margin_top = 39.0
+margin_right = 239.0
+margin_bottom = 74.0
+custom_colors/font_color = Color( 0.12549, 0.898039, 0.0588235, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "0
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lifes" type="Label" parent="HUD"]
+margin_left = 177.0
+margin_top = 12.0
+margin_right = 217.0
+margin_bottom = 28.0
+rect_scale = Vector2( 0.8, 0.8 )
+custom_colors/font_color = Color( 0.12549, 0.898039, 0.0588235, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "00"
+
+[node name="Itens" type="Label" parent="HUD"]
+margin_left = 216.0
+margin_top = 12.0
+margin_right = 256.0
+margin_bottom = 28.0
+rect_scale = Vector2( 0.8, 0.8 )
+custom_colors/font_color = Color( 0.12549, 0.898039, 0.0588235, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pica_Remains" type="Label" parent="HUD"]
+margin_left = 203.0
+margin_top = 125.0
+margin_right = 243.0
+margin_bottom = 141.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_colors/font_color = Color( 0.239216, 0.682353, 1, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="You_Loose" type="AnimatedSprite" parent="HUD"]
+visible = false
+position = Vector2( 72, 72 )
+frames = SubResource( 7 )
+animation = "Retry"
+
+[node name="You_Win" type="AnimatedSprite" parent="HUD"]
+visible = false
+position = Vector2( 72, 72 )
+frames = SubResource( 8 )
+animation = "Menu"
+
+[node name="Floors" type="AnimatedSprite" parent="HUD"]
+position = Vector2( 151, 0 )
+frames = SubResource( 9 )
+animation = "Floor2"
+centered = false
+
+[node name="Tool" type="AnimatedSprite" parent="HUD"]
+position = Vector2( 151, 0 )
+frames = SubResource( 10 )
+animation = "Pica"
+centered = false
+
+[node name="Itens2" type="Label" parent="HUD"]
+margin_left = 228.0
+margin_top = 18.0
+margin_right = 268.0
+margin_bottom = 34.0
+rect_scale = Vector2( 0.25, 0.3 )
+custom_colors/font_color = Color( 0.12549, 0.898039, 0.0588235, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "/10"
+__meta__ = {
+"_edit_use_anchors_": false
+}

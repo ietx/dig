@@ -12,7 +12,7 @@ config_version=4
 
 config/name="Mining"
 run/main_scene="res://Chapa_Games.tscn"
-config/icon="res://icon.png"
+config/icon="res://ICON_DD.png"
 
 [autoload]
 
@@ -70,6 +70,11 @@ Enter={
 exit_game={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777217,"unicode":0,"echo":false,"script":null)
+ ]
+}
+play={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
 
