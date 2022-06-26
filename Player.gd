@@ -13,6 +13,7 @@ var layer3_array = []
 var all_itens = []
 
 var score = 0
+var life = 3
 
 onready var bomb_scene = preload("res://Bomb.tscn")
 onready var ribs_scene = preload("res://Ribs.tscn")
@@ -168,6 +169,7 @@ func _input(event):
 		elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
 			direction = Vector2(-1,0)
 			move_player()
+			
 		
 	if Input.is_action_just_pressed("right") and first_movement_click == "right":
 		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
@@ -182,6 +184,7 @@ func _input(event):
 		elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
 			direction = Vector2(1,0)
 			move_player()
+			
 
 	if Input.is_action_just_pressed("up") and first_movement_click == "up":
 		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
@@ -197,6 +200,7 @@ func _input(event):
 			direction = Vector2(0, -1)
 			move_player()
 			
+			
 	if Input.is_action_just_pressed("down") and first_movement_click == "down":
 		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
 			$Drill.play("Drill")
@@ -210,6 +214,7 @@ func _input(event):
 		elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
 			direction = Vector2(0, 1)
 			move_player()
+			
 
 	if Input.is_action_just_pressed("dive_up"):
 		$Drill.play("Drill_Up")
@@ -272,11 +277,27 @@ func move_player():
 	player_position += direction
 	$PlayerLayer.set_cell(player_position.x, player_position.y, 0)
 	direction = Vector2.ZERO
+	update_sonar()
+	itens_around()
 	
-func sonar():
-	sonar_array.append($PlayerLayer.get_cell(player_position.x - 1, player_position.y))
-	sonar_array.append($PlayerLayer.get_cell(player_position.x + 1, player_position.y))
-	sonar_array.append($PlayerLayer.get_cell(player_position.x - 1, player_position.y - 1))
+func update_sonar():
+	print(player_position)
+	sonar_array.clear()
+	sonar_array.append(player_position + Vector2(-1, -1))
+	sonar_array.append(player_position + Vector2(0, -1))
+	sonar_array.append(player_position + Vector2(1, -1))
+	
+	sonar_array.append(player_position + Vector2(-1, 0))
+	sonar_array.append(player_position + Vector2(1, 0))
+	
+	sonar_array.append(player_position + Vector2(-1, 1))
+	sonar_array.append(player_position + Vector2(0, 1))
+	sonar_array.append(player_position + Vector2(1, 1))
+	
+
+	
+	
+	print(sonar_array)
 	
 func break_tile():
 	if layer1_array.has(player_position) and player_depth == 0:
@@ -339,8 +360,6 @@ func _on_Drill_animation_finished():
 
 func _on_Drill_Hit_Area_area_entered(area):
 	
-	print(area)
-	print(itens_layer1.has(area))
 	
 	for i in itens_layer1:
 		if i[1] == area:
@@ -358,6 +377,10 @@ func _on_Drill_Hit_Area_area_entered(area):
 		score += 1
 		print(score)
 		area.queue_free()
+	
+	if area.is_in_group("bomb"):
+		life -= 1
+		print(life)
 
 func choose(array):
 	return array[randi() % array.size()]	
@@ -483,3 +506,9 @@ func show_layer3_itens():
 		print(i)
 		i[1].position = i[0] * tile_size + tile_size/Vector2(2,2)
 		
+func itens_around():
+	if player_depth == 0:
+		for i in sonar_array:
+			for j in itens_layer1:
+				if i == j[0]:
+					print("hey")
