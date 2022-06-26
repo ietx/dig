@@ -10,6 +10,9 @@ var layer1_array = []
 var layer2_array = []
 var layer3_array = []
 
+var all_itens = []
+
+var bomb_scene = preload("res://Bomb.tscn")
 
 var itens_layer1 = []
 var itens_layer2 = []
@@ -22,6 +25,7 @@ var player_tile_center = Vector2.ZERO
 
 var first_movement_click = "right"
 
+
 var aim_tile_center = Vector2.ZERO
 
 var depth_layer_node
@@ -30,6 +34,11 @@ const MAX_LAYER_DOWN = 2
 
 func _ready():
 	
+	
+	for i in 44:
+		all_itens.append("res://Bomb.tscn")
+	print(all_itens.size())
+		
 	randomize_itens_in_matrix()
 	tile_size = $PlayerLayer.get_cell_size()
 	player_position = Vector2(2,2)
@@ -230,7 +239,10 @@ func choose(array):
 	return array[randi() % array.size()]	
 
 func randomize_itens_in_matrix():
+	
 	var Q1 = []
+	
+	
 	randomize()
 	var Q1_choose_position
 	Q1_choose_position = Vector2(choose([0,1,2]), choose([0,1,2]))
