@@ -29,10 +29,9 @@ const MAX_LAYER_UP = 0
 const MAX_LAYER_DOWN = 2
 
 func _ready():
+	
+	randomize_itens_in_matrix()
 	tile_size = $PlayerLayer.get_cell_size()
-	
-	
-	
 	player_position = Vector2(2,2)
 	$PlayerLayer.set_cell(player_position.x, player_position.y, 0)
 
@@ -226,3 +225,26 @@ func _on_Drill_animation_finished():
 func _on_Drill_Hit_Area_area_entered(area):
 	if area.name == "Single_Bone":
 		area.queue_free()
+
+func choose(array):
+	return array[randi() % array.size()]	
+
+func randomize_itens_in_matrix():
+	var Q1 = []
+	randomize()
+	var Q1_choose_position
+	Q1_choose_position = Vector2(choose([0,1,2]), choose([0,1,2]))
+	while Q1_choose_position == Vector2(2,2):
+		Q1_choose_position = Vector2(choose([0,1,2]), choose([0,1,2]))
+	
+	randomize()
+	var last_Q1_choose_position = Vector2()
+	last_Q1_choose_position = Vector2(choose([0,1,2]), choose([0,1,2]))
+	while Q1_choose_position == last_Q1_choose_position or last_Q1_choose_position == Vector2(2,2):
+		randomize()
+		last_Q1_choose_position = Vector2(choose([0,1,2]), choose([0,1,2]))
+	
+	Q1.append(Q1_choose_position)
+	Q1.append(last_Q1_choose_position)
+	print(Q1)
+
