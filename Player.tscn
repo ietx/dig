@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://player.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Assets/Crack/Crack_3.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Drill/DIG_DRILL_Up.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Drill/DIG_DRILL_Down.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Font/FreePixel.ttf" type="DynamicFontData" id=18]
 
 [sub_resource type="TileSet" id=25]
 0/name = "Tile_Floor_Top_3.png 0"
@@ -337,6 +338,12 @@ animations = [ {
 "speed": 12.0
 } ]
 
+[sub_resource type="DynamicFont" id=45]
+font_data = ExtResource( 18 )
+
+[sub_resource type="DynamicFont" id=46]
+font_data = ExtResource( 18 )
+
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -392,6 +399,33 @@ position = Vector2( -25, 23 )
 [node name="Itens_Layer2" type="Node2D" parent="."]
 
 [node name="Itens_Layer3" type="Node2D" parent="."]
+
+[node name="HUD" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bomb" type="Label" parent="HUD"]
+margin_left = 157.0
+margin_top = 9.0
+margin_right = 197.0
+margin_bottom = 23.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 45 )
+text = "0"
+
+[node name="Bone" type="Label" parent="HUD"]
+margin_left = 231.0
+margin_top = 10.0
+margin_right = 271.0
+margin_bottom = 45.0
+custom_colors/font_color = Color( 0.12549, 0.898039, 0.0588235, 1 )
+custom_fonts/font = SubResource( 46 )
+text = "0
+"
 
 [connection signal="animation_finished" from="Drill" to="." method="_on_Drill_animation_finished"]
 [connection signal="area_entered" from="Drill/Drill_Hit_Area" to="." method="_on_Drill_Hit_Area_area_entered"]

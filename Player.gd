@@ -6,6 +6,10 @@ var direction = Vector2.ZERO
 var aim_tile = Vector2.ZERO
 
 var sonar_array = []
+var bombs_in_sonar_range = 0
+var bones_in_sonar_range = 0
+
+
 var layer1_array = []
 var layer2_array = []
 var layer3_array = []
@@ -26,7 +30,7 @@ onready var single_bone_scene = preload("res://Single_Bone.tscn")
 var itens_layer1 = []
 var itens_layer2 = []
 var itens_layer3 = []
-var bombs_number = 12
+
 #player tile center
 
 var tile_size = Vector2.ZERO
@@ -84,6 +88,8 @@ func _ready():
 	show_layer1_itens()
 	hide_layer2_itens()
 	hide_layer3_itens()
+	update_sonar()
+	itens_around()
 
 
 	pass # Replace with function body.
@@ -224,6 +230,8 @@ func _input(event):
 		
 		$Drill.play("Drill_Down")
 		player_depth -= 1
+		update_sonar()
+		itens_around()
 		
 		if player_depth == 0:
 			depth_layer_node = $Layer1
@@ -281,7 +289,9 @@ func move_player():
 	itens_around()
 	
 func update_sonar():
-	print(player_position)
+	bombs_in_sonar_range = 0
+	bones_in_sonar_range = 0
+	
 	sonar_array.clear()
 	sonar_array.append(player_position + Vector2(-1, -1))
 	sonar_array.append(player_position + Vector2(0, -1))
@@ -293,11 +303,12 @@ func update_sonar():
 	sonar_array.append(player_position + Vector2(-1, 1))
 	sonar_array.append(player_position + Vector2(0, 1))
 	sonar_array.append(player_position + Vector2(1, 1))
+
 	
 
 	
 	
-	print(sonar_array)
+	
 	
 func break_tile():
 	if layer1_array.has(player_position) and player_depth == 0:
@@ -328,6 +339,8 @@ func _on_Drill_animation_finished():
 		$Drill.set_frame(0)
 		$Drill.stop()
 		player_depth += 1
+		update_sonar()
+		itens_around()
 		
 		if player_depth == 0:
 			depth_layer_node = $Layer1
@@ -488,22 +501,21 @@ func hide_layer3_itens():
 		i[1].position = Vector2(500,500)
 
 func show_layer1_itens():
-	print(get_tree())
-	print (itens_layer1.size())
+#	print (itens_layer1.size())
 	for i in itens_layer1:
-		print(i)
+	
 		i[1].position = i[0] * tile_size + tile_size/Vector2(2,2)
 
 func show_layer2_itens():
-	print (itens_layer2.size())
+#	print (itens_layer2.size())
 	for i in itens_layer2:
-		print(i)
+		
 		i[1].position = i[0] * tile_size + tile_size/Vector2(2,2)
 
 func show_layer3_itens():
-	print (itens_layer3.size())
+#	print (itens_layer3.size())
 	for i in itens_layer3:
-		print(i)
+#		
 		i[1].position = i[0] * tile_size + tile_size/Vector2(2,2)
 		
 func itens_around():
@@ -511,4 +523,38 @@ func itens_around():
 		for i in sonar_array:
 			for j in itens_layer1:
 				if i == j[0]:
-					print("hey")
+					if j[1].is_in_group("bomb"):
+						bombs_in_sonar_range += 1
+#						print("BOMB_COUNT: " + String(bombs_in_sonar_range))
+					elif j[1].is_in_group("bones"):
+						bones_in_sonar_range += 1
+#						print("BONE_COUNT: " + String(bones_in_sonar_range))
+		$HUD/Bomb.text = String(bombs_in_sonar_range)
+		$HUD/Bone.text = String(bones_in_sonar_range)
+	
+	
+	if player_depth == 1:
+		for i in sonar_array:
+			for j in itens_layer2:
+				if i == j[0]:
+					if j[1].is_in_group("bomb"):
+						bombs_in_sonar_range += 1
+#						
+					elif j[1].is_in_group("bones"):
+						bones_in_sonar_range += 1
+		$HUD/Bomb.text = String(bombs_in_sonar_range)
+		$HUD/Bone.text = String(bones_in_sonar_range)
+
+	
+	if player_depth == 2:
+		for i in sonar_array:
+			for j in itens_layer3:
+				if i == j[0]:
+					if j[1].is_in_group("bomb"):
+						bombs_in_sonar_range += 1
+#					
+					elif j[1].is_in_group("bones"):
+						bones_in_sonar_range += 1
+		$HUD/Bomb.text = String(bombs_in_sonar_range)
+		$HUD/Bone.text = String(bones_in_sonar_range)
+		
