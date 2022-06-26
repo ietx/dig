@@ -9,6 +9,8 @@ var sonar_array = []
 var bombs_in_sonar_range = 0
 var bones_in_sonar_range = 0
 
+var current_tool = "Drill"
+
 
 var layer1_array = []
 var layer2_array = []
@@ -97,6 +99,7 @@ func _ready():
 
 	pass # Replace with function body.
 func _process(delta):
+	print(current_tool)
 	player_tile_center = Vector2((player_position.x * tile_size.x) + tile_size.x/2, (player_position.y * tile_size.y) + tile_size.y/2)
 	$Drill.position = player_tile_center
 
@@ -116,28 +119,40 @@ func _process(delta):
 		$Tile_Crack.rotation_degrees = 270
 		aim_tile = Vector2(player_position.x, player_position.y - 1)
 		$Aim.clear()
-		$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
+		if current_tool == "Pica":
+			$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
+		elif current_tool == "Drill":
+			$Aim.set_cell(aim_tile.x, aim_tile.y, 1)
 		
 	if first_movement_click == "left":
 		$Drill.rotation_degrees = 180
 		$Tile_Crack.rotation_degrees = 180
 		aim_tile = Vector2(player_position.x - 1, player_position.y)
 		$Aim.clear()
-		$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
+		if current_tool == "Pica":
+			$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
+		elif current_tool == "Drill":
+			$Aim.set_cell(aim_tile.x, aim_tile.y, 1)
 		
 	if first_movement_click == "down":
 		$Drill.rotation_degrees = 90
 		$Tile_Crack.rotation_degrees = 90
 		aim_tile = Vector2(player_position.x, player_position.y + 1)
 		$Aim.clear()
-		$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
+		if current_tool == "Pica":
+			$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
+		elif current_tool == "Drill":
+			$Aim.set_cell(aim_tile.x, aim_tile.y, 1)
 		
 	if first_movement_click == "right":
 		$Drill.rotation_degrees = 0
 		$Tile_Crack.rotation_degrees = 0
 		aim_tile = Vector2(player_position.x + 1, player_position.y)
 		$Aim.clear()
-		$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
+		if current_tool == "Pica":
+			$Aim.set_cell(aim_tile.x, aim_tile.y, 0)
+		elif current_tool == "Drill":
+			$Aim.set_cell(aim_tile.x, aim_tile.y, 1)
 		
 #	print(player_depth)
 
@@ -145,6 +160,7 @@ func _input(event):
 	
 	
 	if Input.is_action_just_pressed("left") and first_movement_click == "left":
+		
 		
 		if player_depth == 0:
 			for i in itens_layer1:
@@ -190,6 +206,7 @@ func _input(event):
 					i[1].set_visible(true)
 		
 		if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
+			
 			$Drill.play("Drill")
 			if player_depth == 0:
 				$Tile_Crack.play("Crack1")
@@ -318,6 +335,14 @@ func _input(event):
 		first_movement_click = "up"
 	if Input.is_action_just_pressed("down"):
 		first_movement_click = "down"
+		
+	
+	if Input.is_action_just_pressed("Tool"):
+	
+		if current_tool == "Drill":
+			current_tool = "Pica"
+		elif current_tool == "Pica":
+			current_tool = "Drill"
 
 func move_player():
 	$PlayerLayer.set_cell(player_position.x, player_position.y, -1)
@@ -362,7 +387,8 @@ func break_tile():
 func _on_Drill_animation_finished():
 	
 	if $Drill.get_animation() == "Drill":
-		move_player()
+		if current_tool == "Drill":
+			move_player()
 		$Drill.stop()
 		$Drill.set_frame(0)
 		$Tile_Crack.stop()

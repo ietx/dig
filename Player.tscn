@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=83 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://player.png" type="Texture" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Assets/Menus/Loose_Menu/Loose_Menu1.png" type="Texture" id=22]
 [ext_resource path="res://Assets/Menus/Win_Menu/Win_Menu2.png" type="Texture" id=23]
 [ext_resource path="res://Assets/Menus/Win_Menu/Win_Menu3.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Radar/Radar.png" type="Texture" id=25]
 
 [sub_resource type="TileSet" id=25]
 0/name = "Tile_Floor_Top_3.png 0"
@@ -223,6 +224,38 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 8, 7 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 25 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 25 )
+region = Rect2( 48, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 25 )
+region = Rect2( 96, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 25 )
+region = Rect2( 144, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 25 )
+region = Rect2( 192, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 25 )
+region = Rect2( 240, 0, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=57]
+animations = [ {
+"frames": [ SubResource( 51 ), SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ) ],
+"loop": true,
+"name": "On",
+"speed": 6.0
+} ]
 
 [sub_resource type="TileSet" id=11]
 0/name = "Tile_Aim_BLUE.png 0"
@@ -429,6 +462,11 @@ collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Drill/Drill_Hit_Area"]
 shape = SubResource( 32 )
+
+[node name="Sonar" type="AnimatedSprite" parent="Drill"]
+frames = SubResource( 57 )
+animation = "On"
+playing = true
 
 [node name="Player_Tile_Center" type="Position2D" parent="."]
 
