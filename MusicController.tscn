@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Global.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sounds/Songs/Main Song 2.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Sounds/Songs/Intro 2.wav" type="AudioStream" id=3]
+
+[node name="MusicController" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Intro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -10.0
+
+[connection signal="finished" from="Intro" to="." method="_on_Intro_finished"]

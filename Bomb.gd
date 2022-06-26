@@ -18,6 +18,7 @@ func _ready():
 
 func _on_Bomb_area_entered(area):
 	$AnimatedSprite.play("Explode")
+	$Explode.play()
 
 
 func _on_AnimatedSprite_animation_finished():

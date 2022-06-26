@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=2]
+[gd_scene load_steps=110 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://player.png" type="Texture" id=2]
@@ -32,6 +32,16 @@
 [ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level3.png" type="Texture" id=30]
 [ext_resource path="res://Assets/HUB/DIG_Hub_Tool2.png" type="Texture" id=31]
 [ext_resource path="res://Assets/HUB/DIG_Hub_Tool1.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Sounds/Fx/Drill.wav" type="AudioStream" id=33]
+[ext_resource path="res://Assets/Sounds/Fx/Drive Up.wav" type="AudioStream" id=34]
+[ext_resource path="res://Assets/Sounds/Fx/Drive Down.wav" type="AudioStream" id=35]
+[ext_resource path="res://Assets/Sounds/Fx/Drive Rotation.wav" type="AudioStream" id=36]
+[ext_resource path="res://Assets/Sounds/Fx/Finding Item.wav" type="AudioStream" id=37]
+[ext_resource path="res://Assets/Sounds/Fx/Menu Select.wav" type="AudioStream" id=38]
+[ext_resource path="res://Assets/Sounds/Fx/Menu Confirm.wav" type="AudioStream" id=39]
+[ext_resource path="res://Assets/Sounds/Fx/Not Available.wav" type="AudioStream" id=40]
+[ext_resource path="res://Assets/Sounds/Fx/Pickaxe Clean Hit.wav" type="AudioStream" id=41]
+[ext_resource path="res://Assets/Sounds/Fx/Radar.wav" type="AudioStream" id=42]
 
 [sub_resource type="TileSet" id=25]
 0/name = "Tile_Floor_Top_3.png 0"
@@ -539,7 +549,7 @@ shape = SubResource( 32 )
 [node name="Sonar" type="AnimatedSprite" parent="Drill"]
 frames = SubResource( 57 )
 animation = "On"
-frame = 5
+frame = 2
 playing = true
 
 [node name="Player_Tile_Center" type="Position2D" parent="."]
@@ -555,7 +565,7 @@ animation = "Crack3"
 
 [node name="Pica" type="AnimatedSprite" parent="."]
 frames = SubResource( 64 )
-frame = 2
+frame = 4
 playing = true
 
 [node name="HUD" type="Control" parent="."]
@@ -566,25 +576,28 @@ __meta__ = {
 }
 
 [node name="HUD_Base" type="Sprite" parent="HUD"]
-position = Vector2( 144, 1 )
+position = Vector2( 144, 0 )
 texture = ExtResource( 27 )
 centered = false
 
 [node name="Bomb" type="Label" parent="HUD"]
-margin_left = 157.0
-margin_top = 9.0
-margin_right = 197.0
-margin_bottom = 23.0
+margin_left = 224.0
+margin_top = 39.0
+margin_right = 264.0
+margin_bottom = 55.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 1, 0, 0, 1 )
 custom_fonts/font = SubResource( 45 )
 text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Bone" type="Label" parent="HUD"]
-margin_left = 231.0
-margin_top = 10.0
-margin_right = 271.0
-margin_bottom = 45.0
+margin_left = 199.0
+margin_top = 39.0
+margin_right = 239.0
+margin_bottom = 74.0
 custom_colors/font_color = Color( 0.12549, 0.898039, 0.0588235, 1 )
 custom_fonts/font = SubResource( 46 )
 text = "0
@@ -594,34 +607,37 @@ __meta__ = {
 }
 
 [node name="Lifes" type="Label" parent="HUD"]
-margin_left = 156.0
-margin_top = 64.0
-margin_right = 196.0
-margin_bottom = 80.0
+margin_left = 177.0
+margin_top = 12.0
+margin_right = 217.0
+margin_bottom = 28.0
+rect_scale = Vector2( 0.8, 0.8 )
 custom_colors/font_color = Color( 0.12549, 0.898039, 0.0588235, 1 )
 custom_fonts/font = SubResource( 47 )
-text = "0"
+text = "00"
 
 [node name="Itens" type="Label" parent="HUD"]
-margin_left = 231.0
-margin_top = 63.0
-margin_right = 271.0
-margin_bottom = 79.0
+margin_left = 216.0
+margin_top = 12.0
+margin_right = 256.0
+margin_bottom = 28.0
+rect_scale = Vector2( 0.8, 0.8 )
 custom_colors/font_color = Color( 0.12549, 0.898039, 0.0588235, 1 )
 custom_fonts/font = SubResource( 48 )
-text = "0"
+text = "00"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Pica_Remains" type="Label" parent="HUD"]
-margin_left = 196.0
-margin_top = 116.0
-margin_right = 236.0
-margin_bottom = 132.0
-custom_colors/font_color = Color( 0.12549, 0.898039, 0.0588235, 1 )
+margin_left = 203.0
+margin_top = 125.0
+margin_right = 243.0
+margin_bottom = 141.0
+rect_scale = Vector2( 0.6, 0.6 )
+custom_colors/font_color = Color( 0.239216, 0.682353, 1, 1 )
 custom_fonts/font = SubResource( 65 )
-text = "0"
+text = "00"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -639,15 +655,77 @@ frames = SubResource( 50 )
 animation = "Menu"
 
 [node name="Floors" type="AnimatedSprite" parent="HUD"]
-position = Vector2( 144, 0 )
+position = Vector2( 151, 0 )
 frames = SubResource( 66 )
 animation = "Floor2"
 centered = false
 
 [node name="Tool" type="AnimatedSprite" parent="HUD"]
+position = Vector2( 151, 0 )
 frames = SubResource( 67 )
 animation = "Pica"
+centered = false
+
+[node name="Itens2" type="Label" parent="HUD"]
+margin_left = 228.0
+margin_top = 18.0
+margin_right = 268.0
+margin_bottom = 34.0
+rect_scale = Vector2( 0.25, 0.3 )
+custom_colors/font_color = Color( 0.12549, 0.898039, 0.0588235, 1 )
+custom_fonts/font = SubResource( 48 )
+text = "/10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FX" type="Node2D" parent="."]
+
+[node name="Drill" type="AudioStreamPlayer" parent="FX"]
+stream = ExtResource( 33 )
+volume_db = -15.0
+pitch_scale = 0.9
+
+[node name="DiveUp" type="AudioStreamPlayer" parent="FX"]
+stream = ExtResource( 34 )
+
+[node name="DiveDown" type="AudioStreamPlayer" parent="FX"]
+stream = ExtResource( 35 )
+
+[node name="DriveAround" type="AudioStreamPlayer" parent="FX"]
+stream = ExtResource( 36 )
+volume_db = -10.0
+
+[node name="Find_Bone" type="AudioStreamPlayer" parent="FX"]
+stream = ExtResource( 37 )
+volume_db = -10.0
+
+[node name="Control_Switch" type="AudioStreamPlayer" parent="FX"]
+stream = ExtResource( 38 )
+volume_db = -10.0
+
+[node name="Control_Enter" type="AudioStreamPlayer" parent="FX"]
+stream = ExtResource( 39 )
+volume_db = -5.0
+
+[node name="Not_Available" type="AudioStreamPlayer" parent="FX"]
+stream = ExtResource( 40 )
+
+[node name="Pica" type="AudioStreamPlayer" parent="FX"]
+stream = ExtResource( 41 )
+volume_db = -5.0
+
+[node name="Radar" type="AudioStreamPlayer" parent="FX"]
+stream = ExtResource( 42 )
+volume_db = -10.0
+autoplay = true
+
+[node name="Timer" type="Timer" parent="FX/Radar"]
+wait_time = 3.0
+one_shot = true
 
 [connection signal="animation_finished" from="Drill" to="." method="_on_Drill_animation_finished"]
 [connection signal="area_entered" from="Drill/Drill_Hit_Area" to="." method="_on_Drill_Hit_Area_area_entered"]
 [connection signal="animation_finished" from="Tile_Crack" to="." method="_on_Tile_Crack_animation_finished"]
+[connection signal="finished" from="FX/Radar" to="." method="_on_Radar_finished"]
+[connection signal="timeout" from="FX/Radar/Timer" to="." method="_on_Timer_timeout"]
