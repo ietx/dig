@@ -114,13 +114,14 @@ func _process(delta):
 	if player_depth == 2:
 		$HUD/Floors.play("Floor3")
 	if pica_using_times <= 0:
+		
 			current_tool = "Drill"
 				
 	$HUD/Pica_Remains.text = String(pica_using_times)
 	if score >= 10:
 		you_win()
 	
-	print(current_tool)
+	
 	player_tile_center = Vector2((player_position.x * tile_size.x) + tile_size.x/2, (player_position.y * tile_size.y) + tile_size.y/2)
 	$Drill.position = player_tile_center
 
@@ -139,8 +140,10 @@ func _process(delta):
 	
 	if current_tool == "Pica":
 		$Pica.set_visible(true)
+		$HUD/Tool.play("Pica")
 	elif current_tool == "Drill":
 		$Pica.set_visible(false)
+		$HUD/Tool.play("Drill")
 	
 	
 	if first_movement_click == "up":
@@ -187,8 +190,12 @@ func _process(delta):
 
 func _input(event):
 	
+	if Input.is_action_just_pressed("exit_game"):
+		get_tree().quit()
+		
 	if can_move == true and end_game == "No_End":
 		if Input.is_action_just_pressed("left") and first_movement_click == "left":
+			
 			can_move = false
 			
 			if player_depth == 0:
@@ -206,6 +213,10 @@ func _input(event):
 				
 			
 			if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
+				if current_tool == "Drill":
+					$FX/Drill.play()
+				elif current_tool == "Pica":
+					$FX/Pica.play()
 				$Drill.play("Drill")
 				if player_depth == 0:
 					$Tile_Crack.play("Crack1")
@@ -215,11 +226,13 @@ func _input(event):
 					$Tile_Crack.play("Crack3")
 				direction = Vector2(-1,0)
 			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
+				$FX/DriveAround.play()
 				direction = Vector2(-1,0)
 				move_player()
 				
 			
 		if Input.is_action_just_pressed("right") and first_movement_click == "right":
+			
 			can_move = false
 			
 			if player_depth == 0:
@@ -236,7 +249,11 @@ func _input(event):
 						i[1].set_visible(true)
 			
 			if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
-				
+				if current_tool == "Drill":
+					$FX/Drill.play()
+				elif current_tool == "Pica":
+					$FX/Pica.play()
+					
 				$Drill.play("Drill")
 				if player_depth == 0:
 					$Tile_Crack.play("Crack1")
@@ -246,11 +263,13 @@ func _input(event):
 					$Tile_Crack.play("Crack3")
 				direction = Vector2(1,0)
 			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
+				$FX/DriveAround.play()
 				direction = Vector2(1,0)
 				move_player()
 				
 
 		if Input.is_action_just_pressed("up") and first_movement_click == "up":
+		
 			can_move = false
 			if player_depth == 0:
 				for i in itens_layer1:
@@ -266,6 +285,12 @@ func _input(event):
 						i[1].set_visible(true)
 			
 			if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
+				
+				if current_tool == "Drill":
+					$FX/Drill.play()
+				elif current_tool == "Pica":
+					$FX/Pica.play()
+				
 				$Drill.play("Drill")
 				if player_depth == 0:
 					$Tile_Crack.play("Crack1")
@@ -275,11 +300,13 @@ func _input(event):
 					$Tile_Crack.play("Crack3")
 				direction = Vector2(0, -1)
 			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
+				$FX/DriveAround.play()
 				direction = Vector2(0, -1)
 				move_player()
 				
 				
 		if Input.is_action_just_pressed("down") and first_movement_click == "down":
+			
 			can_move = false
 			
 			if player_depth == 0:
@@ -296,6 +323,12 @@ func _input(event):
 						i[1].set_visible(true)
 			
 			if depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 0:
+				
+				if current_tool == "Drill":
+					$FX/Drill.play()
+				elif current_tool == "Pica":
+					$FX/Pica.play()
+				
 				$Drill.play("Drill")
 				if player_depth == 0:
 					$Tile_Crack.play("Crack1")
@@ -305,16 +338,19 @@ func _input(event):
 					$Tile_Crack.play("Crack3")
 				direction = Vector2(0, 1)
 			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 1:
+				$FX/DriveAround.play()
 				direction = Vector2(0, 1)
 				move_player()
 				
 
 		if Input.is_action_just_pressed("dive_up")and player_depth < 2:
+			$FX/DiveUp.play()
 			can_move = false
 			$Drill.play("Drill_Up")
 			
 	#		player_depth += 1
 		if Input.is_action_just_pressed("dive_down") and player_depth > 0:
+			$FX/DiveDown.play()
 			can_move = false
 			
 			$Drill.play("Drill_Down")
@@ -377,33 +413,42 @@ func _input(event):
 			
 			if pica_using_times <= 0:
 				current_tool = "Drill"
+				$FX/Not_Available.play()
 			else:
 				if current_tool == "Drill":
+					$FX/Control_Switch.play()
 					current_tool = "Pica"
 				elif current_tool == "Pica":
+					$FX/Control_Switch.play()
 					current_tool = "Drill"
 	
 	elif end_game == "Loose": #cant move
+		
 		if cursor_you_loose == 0:
 			$HUD/You_Loose.play("Retry")
 			if Input.is_action_just_pressed("Enter"):
+				$FX/Control_Enter.play()
 				get_tree().reload_current_scene()
 		if cursor_you_loose == 1:
 			$HUD/You_Loose.play("Menu")
 			if Input.is_action_just_pressed("Enter"):
+				$FX/Control_Enter.play()
 				get_tree().change_scene("res://player.png")
 		if cursor_you_loose == 2:
 			$HUD/You_Loose.play("Quit")
 			if Input.is_action_just_pressed("Enter"):
+				$FX/Control_Enter.play()
 				get_tree().quit()
 		
 		
 		if Input.is_action_just_pressed("left"):
+			$FX/Control_Switch.play()
 			cursor_you_loose -= 1
 			cursor_you_loose = clamp(cursor_you_loose, 0, 2)
 			
-			$HUD/You_Loose.play()
+			
 		if Input.is_action_just_pressed("right"):
+			$FX/Control_Switch.play()
 			cursor_you_loose += 1
 			cursor_you_loose = clamp(cursor_you_loose, 0, 2)
 	
@@ -411,21 +456,27 @@ func _input(event):
 		if cursor_you_loose == 0:
 			$HUD/You_Win.play("Retry")
 			if Input.is_action_just_pressed("Enter"):
+				$FX/Control_Enter.play()
 				get_tree().reload_current_scene()
 		if cursor_you_loose == 1:
 			$HUD/You_Win.play("Menu")
 			if Input.is_action_just_pressed("Enter"):
+				$FX/Control_Enter.play()
 				get_tree().change_scene("res://player.png")
 		if cursor_you_loose == 2:
 			$HUD/You_Win.play("Quit")
 			if Input.is_action_just_pressed("Enter"):
+				$FX/Control_Enter.play()
 				get_tree().quit()
+				
 		if Input.is_action_just_pressed("left"):
+			$FX/Control_Switch.play()
 			cursor_you_loose -= 1
 			cursor_you_loose = clamp(cursor_you_loose, 0, 2)
 			
 			$HUD/You_Loose.play()
 		if Input.is_action_just_pressed("right"):
+			$FX/Control_Switch.play()
 			cursor_you_loose += 1
 			cursor_you_loose = clamp(cursor_you_loose, 0, 2)
 	
@@ -481,6 +532,18 @@ func _on_Drill_animation_finished():
 		elif current_tool == "Pica":
 			can_move = true
 			pica_using_times -= 1
+			if pica_using_times <= 0:
+				$FX/Not_Available.play()
+			
+			
+#			Break pica tile
+			if layer1_array.has(aim_tile) and player_depth == 0:
+				$Layer1.set_cell(aim_tile.x, aim_tile.y, 1)
+			if layer2_array.has(aim_tile) and player_depth == 1:
+				$Layer2.set_cell(aim_tile.x, aim_tile.y, 1)
+			if layer3_array.has(aim_tile) and player_depth == 2:
+				$Layer3.set_cell(aim_tile.x, aim_tile.y, 1)
+			
 		$Drill.stop()
 		$Drill.set_frame(0)
 		$Tile_Crack.stop()
@@ -545,6 +608,7 @@ func _on_Drill_Hit_Area_area_entered(area):
 			itens_layer3.erase(i)
 	
 	if area.is_in_group("bones"):
+		$FX/Find_Bone.play()
 		score += 1
 		$HUD/Itens.text = String(score)
 	
@@ -729,3 +793,11 @@ func you_win():
 	
 
 
+
+
+func _on_Radar_finished():
+	$FX/Radar/Timer.start()
+
+
+func _on_Timer_timeout():
+	$FX/Radar.play()
