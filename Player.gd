@@ -12,7 +12,14 @@ var layer3_array = []
 
 var all_itens = []
 
-var bomb_scene = preload("res://Bomb.tscn")
+
+onready var bomb_scene = preload("res://Bomb.tscn")
+onready var ribs_scene = preload("res://Ribs.tscn")
+onready var leg_scene = preload("res://Leg.tscn")
+onready var arm_scene = preload("res://Arm.tscn")
+onready var head_scene = preload("res://Head.tscn")
+onready var claw_scene = preload("res://Claw.tscn")
+onready var single_bone_scene = preload("res://Single_Bone.tscn")
 
 var itens_layer1 = []
 var itens_layer2 = []
@@ -33,14 +40,32 @@ const MAX_LAYER_UP = 0
 const MAX_LAYER_DOWN = 2
 
 func _ready():
-	
+	tile_size = $PlayerLayer.get_cell_size()
 	
 	for i in 44:
-		all_itens.append("res://Bomb.tscn")
-	print(all_itens.size())
+		var b = bomb_scene.instance()
+		add_child(b)
+		all_itens.append(b)
+	
+	var rib = ribs_scene.instance()
+	add_child(rib)
+	var leg = leg_scene.instance()
+	add_child(leg)
+	var arm = arm_scene.instance()
+	add_child(arm)
+	var head = head_scene.instance()
+	add_child(head)
+	var claw = claw_scene.instance()
+	add_child(claw)
+	var single_bone = single_bone_scene.instance()
+	add_child(single_bone)
+	
+	all_itens.append_array([rib, leg, leg, arm, arm, head, claw, claw, single_bone, single_bone])
+#	print(all_itens.size())
+	
 		
 	randomize_itens_in_matrix()
-	tile_size = $PlayerLayer.get_cell_size()
+	
 	player_position = Vector2(2,2)
 	$PlayerLayer.set_cell(player_position.x, player_position.y, 0)
 
@@ -62,20 +87,23 @@ func _process(delta):
 		$Layer1.set_visible(true)
 		$Layer2.set_visible(false)
 		$Layer3.set_visible(false)
-		$Itens_Layer1.position = Vector2(0, 0)
+		
 		
 	elif player_depth == 1:
 		depth_layer_node = $Layer2
 		$Layer1.set_visible(false)
 		$Layer2.set_visible(true)
 		$Layer3.set_visible(false)
-		$Itens_Layer1.position = Vector2(0, -500)
+		
+		
+		hide_layer1_itens()
+		
 	if player_depth == 2:
 		depth_layer_node = $Layer3
 		$Layer1.set_visible(false)
 		$Layer2.set_visible(false)
 		$Layer3.set_visible(true)
-		$Itens_Layer1.position = Vector2(0, -500)
+		
 	
 	break_tile()
 	
@@ -170,8 +198,10 @@ func _input(event):
 
 	if Input.is_action_just_pressed("dive_up"):
 		$Drill.play("Drill_Up")
+		
 #		player_depth += 1
 	if Input.is_action_just_pressed("dive_down"):
+		
 		$Drill.play("Drill_Down")
 		player_depth -= 1
 		
@@ -210,7 +240,7 @@ func break_tile():
 
 
 func _on_Drill_animation_finished():
-	print($Drill.get_animation())
+	
 	if $Drill.get_animation() == "Drill":
 		move_player()
 		$Drill.stop()
@@ -240,23 +270,91 @@ func choose(array):
 
 func randomize_itens_in_matrix():
 	
+	[0, 1, 2]
+	
+	itens_layer1.append_array(random_itens_in_quadrant([0, 1, 2], [3, 4, 5]))
+	itens_layer1.append_array(random_itens_in_quadrant([0, 1, 2], [3, 4, 5]))
+	itens_layer1.append_array(random_itens_in_quadrant([0, 1, 2], [6, 7, 8]))
+	itens_layer1.append_array(random_itens_in_quadrant([3, 4, 5], [0, 1, 2]))
+	itens_layer1.append_array(random_itens_in_quadrant([3, 4, 5], [3, 4, 5]))
+	itens_layer1.append_array(random_itens_in_quadrant([3, 4, 5], [6, 7, 8]))
+	itens_layer1.append_array(random_itens_in_quadrant([6, 7, 8], [0, 1, 2]))
+	itens_layer1.append_array(random_itens_in_quadrant([6, 7, 8], [3, 4, 5]))
+	itens_layer1.append_array(random_itens_in_quadrant([6, 7, 8], [6, 7, 8]))
+	
+	itens_layer2.append_array(random_itens_in_quadrant([0, 1, 2], [3, 4, 5]))
+	itens_layer2.append_array(random_itens_in_quadrant([0, 1, 2], [3, 4, 5]))
+	itens_layer2.append_array(random_itens_in_quadrant([0, 1, 2], [6, 7, 8]))
+	itens_layer2.append_array(random_itens_in_quadrant([3, 4, 5], [0, 1, 2]))
+	itens_layer2.append_array(random_itens_in_quadrant([3, 4, 5], [3, 4, 5]))
+	itens_layer2.append_array(random_itens_in_quadrant([3, 4, 5], [6, 7, 8]))
+	itens_layer2.append_array(random_itens_in_quadrant([6, 7, 8], [0, 1, 2]))
+	itens_layer2.append_array(random_itens_in_quadrant([6, 7, 8], [3, 4, 5]))
+	itens_layer2.append_array(random_itens_in_quadrant([6, 7, 8], [6, 7, 8]))
+	
+	itens_layer3.append_array(random_itens_in_quadrant([0, 1, 2], [3, 4, 5]))
+	itens_layer3.append_array(random_itens_in_quadrant([0, 1, 2], [3, 4, 5]))
+	itens_layer3.append_array(random_itens_in_quadrant([0, 1, 2], [6, 7, 8]))
+	itens_layer3.append_array(random_itens_in_quadrant([3, 4, 5], [0, 1, 2]))
+	itens_layer3.append_array(random_itens_in_quadrant([3, 4, 5], [3, 4, 5]))
+	itens_layer3.append_array(random_itens_in_quadrant([3, 4, 5], [6, 7, 8]))
+	itens_layer3.append_array(random_itens_in_quadrant([6, 7, 8], [0, 1, 2]))
+	itens_layer3.append_array(random_itens_in_quadrant([6, 7, 8], [3, 4, 5]))
+	itens_layer3.append_array(random_itens_in_quadrant([6, 7, 8], [6, 7, 8]))
+	
+	
+#	print(itens_layer1)
+	
+		
+
+func random_itens_in_quadrant(arrayx,arrayy):
+	
 	var Q1 = []
+	
+	
 	
 	
 	randomize()
 	var Q1_choose_position
-	Q1_choose_position = Vector2(choose([0,1,2]), choose([0,1,2]))
+	Q1_choose_position = Vector2(choose(arrayx), choose(arrayy))
 	while Q1_choose_position == Vector2(2,2):
-		Q1_choose_position = Vector2(choose([0,1,2]), choose([0,1,2]))
+		Q1_choose_position = Vector2(choose(arrayx), choose(arrayy))
 	
+	var object = choose(all_itens)
+	all_itens.erase(object)
+	
+	object.position.x = Q1_choose_position.x * tile_size.x + tile_size.x/2
+	object.position.y = Q1_choose_position.y * tile_size.y + tile_size.y/2
+#	print(object.get_global_position())
+#	print(all_itens.size())
+#	print(object)
+	
+	
+
 	randomize()
 	var last_Q1_choose_position = Vector2()
-	last_Q1_choose_position = Vector2(choose([0,1,2]), choose([0,1,2]))
+	last_Q1_choose_position = Vector2(choose(arrayx), choose(arrayy))
 	while Q1_choose_position == last_Q1_choose_position or last_Q1_choose_position == Vector2(2,2):
 		randomize()
-		last_Q1_choose_position = Vector2(choose([0,1,2]), choose([0,1,2]))
+		last_Q1_choose_position = Vector2(choose(arrayx), choose(arrayy))
+	var last_object = choose(all_itens)
+	all_itens.erase(last_object)
+	if last_Q1_choose_position == Vector2(0, 0):
+		last_object.position = tile_size/Vector2(2,2)
+	else:
+		last_object.position = last_Q1_choose_position * tile_size + tile_size/ Vector2(2,2)
+#	print(all_itens.size())
+#	print(last_object)
 	
-	Q1.append(Q1_choose_position)
-	Q1.append(last_Q1_choose_position)
-	print(Q1)
+	Q1.append([Q1_choose_position, object])
+	Q1.append([last_Q1_choose_position, last_object])
+#	print(Q1)
+	
+	return Q1
 
+func hide_layer1_itens():
+#	print (itens_layer1)
+	for i in itens_layer1:
+		print(i[1])
+		i[1].position = Vector2(500,500)
+		

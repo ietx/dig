@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://player.png" type="Texture" id=2]
@@ -17,8 +17,6 @@
 [ext_resource path="res://Assets/Crack/Crack_3.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Drill/DIG_DRILL_Up.png" type="Texture" id=16]
 [ext_resource path="res://Assets/Drill/DIG_DRILL_Down.png" type="Texture" id=17]
-[ext_resource path="res://Bomb.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Single_Bone.tscn" type="PackedScene" id=19]
 
 [sub_resource type="TileSet" id=25]
 0/name = "Tile_Floor_Top_3.png 0"
@@ -126,6 +124,30 @@
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 5 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 5 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 5 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 5 )
+region = Rect2( 80, 0, 16, 16 )
+
 [sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 16 )
 region = Rect2( 0, 0, 16, 16 )
@@ -174,32 +196,13 @@ region = Rect2( 64, 0, 16, 16 )
 atlas = ExtResource( 17 )
 region = Rect2( 80, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 5 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 5 )
-region = Rect2( 32, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 5 )
-region = Rect2( 48, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 5 )
-region = Rect2( 64, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 5 )
-region = Rect2( 80, 0, 16, 16 )
-
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "Drill",
+"speed": 12.0
+}, {
 "frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
 "loop": false,
 "name": "Drill_Down",
@@ -208,11 +211,6 @@ animations = [ {
 "frames": [ SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
 "loop": true,
 "name": "Drill_Up",
-"speed": 12.0
-}, {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
-"loop": false,
-"name": "Drill",
 "speed": 12.0
 } ]
 
@@ -367,10 +365,12 @@ cell_size = Vector2( 16, 16 )
 format = 1
 
 [node name="Drill" type="AnimatedSprite" parent="."]
+position = Vector2( 72, 0 )
 frames = SubResource( 10 )
 animation = "Drill"
 
 [node name="Drill_Hit_Area" type="Area2D" parent="Drill"]
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Drill/Drill_Hit_Area"]
 shape = SubResource( 32 )
@@ -387,12 +387,7 @@ frames = SubResource( 18 )
 animation = "Crack3"
 
 [node name="Itens_Layer1" type="Node2D" parent="."]
-
-[node name="Bomb" parent="Itens_Layer1" instance=ExtResource( 18 )]
-position = Vector2( 40, 8 )
-
-[node name="Single_Bone" parent="Itens_Layer1" instance=ExtResource( 19 )]
-position = Vector2( 24, 24 )
+position = Vector2( -25, 23 )
 
 [node name="Itens_Layer2" type="Node2D" parent="."]
 

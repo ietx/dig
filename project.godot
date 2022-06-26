@@ -53,6 +53,12 @@ dive_up={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="bone"
+2d_physics/layer_3="bomb"
+
 [physics]
 
 common/enable_pause_aware_picking=true

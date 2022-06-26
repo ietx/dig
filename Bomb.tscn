@@ -69,6 +69,7 @@ animations = [ {
 } ]
 
 [node name="Bomb" type="Area2D"]
+collision_layer = 4
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -77,7 +78,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 14 )
 animation = "Idle"
-frame = 3
+frame = 5
 playing = true
 
 [connection signal="area_entered" from="." to="." method="_on_Bomb_area_entered"]
