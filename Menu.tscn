@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Menu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Font/FreePixel.ttf" type="DynamicFontData" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level1.png" type="Texture" id=14]
 [ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level2.png" type="Texture" id=15]
 [ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level3.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Menus/How_To_Play/DIG_Menu_How_To_Play.png" type="Texture" id=17]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Tile_Floor_Top.png 0"
@@ -69,14 +70,14 @@ animations = [ {
 "name": "Menu",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "Quit",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "Retry",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "Quit",
 "speed": 5.0
 } ]
 
@@ -87,27 +88,27 @@ animations = [ {
 "name": "Menu",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "Quit",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "Retry",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "Quit",
 "speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
-"frames": [ ExtResource( 15 ) ],
-"loop": false,
-"name": "Floor2",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 16 ) ],
 "loop": false,
 "name": "Floor3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": false,
+"name": "Floor2",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 14 ) ],
@@ -184,7 +185,7 @@ margin_bottom = 28.0
 rect_scale = Vector2( 0.8, 0.8 )
 custom_colors/font_color = Color( 0.12549, 0.898039, 0.0588235, 1 )
 custom_fonts/font = SubResource( 4 )
-text = "00"
+text = "0"
 
 [node name="Itens" type="Label" parent="HUD"]
 margin_left = 216.0
@@ -248,3 +249,7 @@ text = "/10"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 17 )
+centered = false

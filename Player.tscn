@@ -149,30 +149,6 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 5 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 5 )
-region = Rect2( 32, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 5 )
-region = Rect2( 48, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 5 )
-region = Rect2( 64, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 5 )
-region = Rect2( 80, 0, 16, 16 )
-
 [sub_resource type="AtlasTexture" id=33]
 atlas = ExtResource( 16 )
 region = Rect2( 0, 0, 16, 16 )
@@ -221,13 +197,32 @@ region = Rect2( 64, 0, 16, 16 )
 atlas = ExtResource( 17 )
 region = Rect2( 80, 0, 16, 16 )
 
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 5 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 5 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 5 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 5 )
+region = Rect2( 80, 0, 16, 16 )
+
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
-"loop": false,
-"name": "Drill",
-"speed": 12.0
-}, {
 "frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
 "loop": false,
 "name": "Drill_Down",
@@ -236,6 +231,11 @@ animations = [ {
 "frames": [ SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
 "loop": true,
 "name": "Drill_Up",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": false,
+"name": "Drill",
 "speed": 12.0
 } ]
 
@@ -304,6 +304,30 @@ animations = [ {
 1/shapes = [  ]
 1/z_index = 0
 
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 8 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 8 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 8 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 8 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 8 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 8 )
+region = Rect2( 80, 0, 16, 16 )
+
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 16, 16 )
@@ -352,32 +376,13 @@ region = Rect2( 64, 0, 16, 16 )
 atlas = ExtResource( 15 )
 region = Rect2( 80, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 8 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 8 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 8 )
-region = Rect2( 32, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 8 )
-region = Rect2( 48, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 8 )
-region = Rect2( 64, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 8 )
-region = Rect2( 80, 0, 16, 16 )
-
 [sub_resource type="SpriteFrames" id=18]
 animations = [ {
+"frames": [ ExtResource( 9 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
+"loop": false,
+"name": "Crack1",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 9 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
 "loop": false,
 "name": "Crack2",
@@ -386,11 +391,6 @@ animations = [ {
 "frames": [ ExtResource( 9 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
 "loop": false,
 "name": "Crack3",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 9 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
-"loop": false,
-"name": "Crack1",
 "speed": 12.0
 } ]
 
@@ -443,14 +443,14 @@ font_data = ExtResource( 18 )
 
 [sub_resource type="SpriteFrames" id=49]
 animations = [ {
-"frames": [ ExtResource( 19 ) ],
-"loop": true,
-"name": "Menu",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 21 ) ],
 "loop": true,
 "name": "Quit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ) ],
+"loop": true,
+"name": "Menu",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 22 ) ],
@@ -461,14 +461,14 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=50]
 animations = [ {
-"frames": [ ExtResource( 23 ) ],
-"loop": true,
-"name": "Menu",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 24 ) ],
 "loop": true,
 "name": "Quit",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "Menu",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 20 ) ],
@@ -484,14 +484,14 @@ animations = [ {
 "name": "Floor2",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 30 ) ],
-"loop": false,
-"name": "Floor3",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 28 ) ],
 "loop": false,
 "name": "Floor1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 30 ) ],
+"loop": false,
+"name": "Floor3",
 "speed": 5.0
 } ]
 
@@ -549,7 +549,7 @@ shape = SubResource( 32 )
 [node name="Sonar" type="AnimatedSprite" parent="Drill"]
 frames = SubResource( 57 )
 animation = "On"
-frame = 2
+frame = 5
 playing = true
 
 [node name="Player_Tile_Center" type="Position2D" parent="."]
@@ -565,7 +565,7 @@ animation = "Crack3"
 
 [node name="Pica" type="AnimatedSprite" parent="."]
 frames = SubResource( 64 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="HUD" type="Control" parent="."]

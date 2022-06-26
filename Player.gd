@@ -106,7 +106,8 @@ func _ready():
 
 	pass # Replace with function body.
 func _process(delta):
-	
+	print(can_move)
+	print(player_position)
 	if player_depth == 0:
 		$HUD/Floors.play("Floor1")
 	if player_depth == 1:
@@ -226,7 +227,10 @@ func _input(event):
 				$FX/DriveAround.play()
 				direction = Vector2(-1,0)
 				move_player()
-				
+			
+			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == -1:
+				can_move = true
+				$FX/Not_Available.play()
 			
 		if Input.is_action_just_pressed("right") and first_movement_click == "right":
 			
@@ -263,7 +267,10 @@ func _input(event):
 				$FX/DriveAround.play()
 				direction = Vector2(1,0)
 				move_player()
-				
+			
+			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == -1:
+				can_move = true
+				$FX/Not_Available.play()
 
 		if Input.is_action_just_pressed("up") and first_movement_click == "up":
 		
@@ -300,6 +307,9 @@ func _input(event):
 				$FX/DriveAround.play()
 				direction = Vector2(0, -1)
 				move_player()
+			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == -1:
+				can_move = true
+				$FX/Not_Available.play()
 				
 				
 		if Input.is_action_just_pressed("down") and first_movement_click == "down":
@@ -338,6 +348,10 @@ func _input(event):
 				$FX/DriveAround.play()
 				direction = Vector2(0, 1)
 				move_player()
+			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == -1:
+				can_move = true
+				$FX/Not_Available.play()
+				
 				
 
 		if Input.is_action_just_pressed("dive_up")and player_depth < 2:
@@ -481,7 +495,10 @@ func _input(event):
 		pass
 
 func move_player():
+	
+
 	$PlayerLayer.set_cell(player_position.x, player_position.y, -1)
+#	if player_position + direction >= Vector2(0,0) or player_position + direction <= Vector2(8,8):
 	player_position += direction
 	$PlayerLayer.set_cell(player_position.x, player_position.y, 0)
 	direction = Vector2.ZERO
