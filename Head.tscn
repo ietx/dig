@@ -6,7 +6,6 @@
 extents = Vector2( 7, 7 )
 
 [node name="Head" type="Area2D" groups=["bones"]]
-visible = false
 collision_layer = 2
 
 [node name="Sprite" type="Sprite" parent="."]

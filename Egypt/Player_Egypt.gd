@@ -40,6 +40,8 @@ onready var single_bone_scene = preload("res://Single_Bone.tscn")
 var itens_layer1 = []
 var itens_layer2 = []
 var itens_layer3 = []
+var itens_layer4 = []
+var itens_layer5 = []
 
 #player tile center
 
@@ -102,6 +104,8 @@ func _ready():
 	show_layer1_itens()
 	hide_layer2_itens()
 	hide_layer3_itens()
+	hide_layer4_itens()
+	hide_layer5_itens()
 	update_sonar()
 	itens_around()
 
@@ -109,7 +113,7 @@ func _ready():
 	pass # Replace with function body.
 func _process(delta):
 #	print($Layer5.get_cellv(player_position))
-	print(player_position)
+#	print(player_position)
 
 	
 	#HUD LAYERS
@@ -716,6 +720,8 @@ func check_player_depth():
 				show_layer1_itens()
 				hide_layer2_itens()
 				hide_layer3_itens()
+				hide_layer4_itens()
+				hide_layer5_itens()
 				
 		elif player_depth == 1:
 			depth_layer_node = $Layer2
@@ -728,6 +734,8 @@ func check_player_depth():
 			hide_layer1_itens()
 			show_layer2_itens()
 			hide_layer3_itens()
+			hide_layer4_itens()
+			hide_layer5_itens()
 			
 			
 			
@@ -742,6 +750,9 @@ func check_player_depth():
 			hide_layer1_itens()
 			hide_layer2_itens()
 			show_layer3_itens()
+			hide_layer4_itens()
+			hide_layer5_itens()
+			
 		
 		if player_depth == 3:
 			depth_layer_node = $Layer4
@@ -754,6 +765,8 @@ func check_player_depth():
 			hide_layer1_itens()
 			hide_layer2_itens()
 			hide_layer3_itens()
+			show_layer4_itens()
+			hide_layer5_itens()
 			
 		if player_depth == 4:
 			depth_layer_node = $Layer5
@@ -766,6 +779,8 @@ func check_player_depth():
 			hide_layer1_itens()
 			hide_layer2_itens()
 			hide_layer3_itens()
+			hide_layer4_itens()
+			show_layer5_itens()
 			
 		
 
@@ -783,6 +798,14 @@ func _on_Drill_Hit_Area_area_entered(area):
 	for i in itens_layer3:
 		if i[1] == area:
 			itens_layer3.erase(i)
+	
+	for i in itens_layer4:
+		if i[1] == area:
+			itens_layer4.erase(i)
+	
+	for i in itens_layer5:
+		if i[1] == area:
+			itens_layer5.erase(i)
 	
 	if area.is_in_group("bones"):
 		$FX/Find_Bone.play()
@@ -802,36 +825,44 @@ func randomize_itens_in_matrix():
 	
 	[0, 1, 2]
 	
-	itens_layer1.append_array(random_itens_in_quadrant([0, 1, 2], [0, 1, 2]))
-	itens_layer1.append_array(random_itens_in_quadrant([0, 1, 2], [3, 4, 5]))
-	itens_layer1.append_array(random_itens_in_quadrant([0, 1, 2], [6, 7, 8]))
-	itens_layer1.append_array(random_itens_in_quadrant([3, 4, 5], [0, 1, 2]))
+
 	itens_layer1.append_array(random_itens_in_quadrant([3, 4, 5], [3, 4, 5]))
-	itens_layer1.append_array(random_itens_in_quadrant([3, 4, 5], [6, 7, 8]))
-	itens_layer1.append_array(random_itens_in_quadrant([6, 7, 8], [0, 1, 2]))
-	itens_layer1.append_array(random_itens_in_quadrant([6, 7, 8], [3, 4, 5]))
-	itens_layer1.append_array(random_itens_in_quadrant([6, 7, 8], [6, 7, 8]))
+
 	
-	itens_layer2.append_array(random_itens_in_quadrant([0, 1, 2], [0, 1, 2]))
-	itens_layer2.append_array(random_itens_in_quadrant([0, 1, 2], [3, 4, 5]))
-	itens_layer2.append_array(random_itens_in_quadrant([0, 1, 2], [6, 7, 8]))
-	itens_layer2.append_array(random_itens_in_quadrant([3, 4, 5], [0, 1, 2]))
-	itens_layer2.append_array(random_itens_in_quadrant([3, 4, 5], [3, 4, 5]))
-	itens_layer2.append_array(random_itens_in_quadrant([3, 4, 5], [6, 7, 8]))
-	itens_layer2.append_array(random_itens_in_quadrant([6, 7, 8], [0, 1, 2]))
-	itens_layer2.append_array(random_itens_in_quadrant([6, 7, 8], [3, 4, 5]))
-	itens_layer2.append_array(random_itens_in_quadrant([6, 7, 8], [6, 7, 8]))
+	itens_layer2.append_array(random_itens_in_quadrant([2, 3, 4], [2, 3]))
+	itens_layer2.append_array(random_itens_in_quadrant([5, 6], [2, 3, 4]))
+	itens_layer2.append_array(random_itens_in_quadrant([2, 3], [4, 5, 6]))
+	itens_layer2.append_array(random_itens_in_quadrant([4, 5, 6], [5, 6]))
+
 	
-	itens_layer3.append_array(random_itens_in_quadrant([0, 1, 2], [0, 1, 2]))
-	itens_layer3.append_array(random_itens_in_quadrant([0, 1, 2], [3, 4, 5]))
-	itens_layer3.append_array(random_itens_in_quadrant([0, 1, 2], [6, 7, 8]))
-	itens_layer3.append_array(random_itens_in_quadrant([3, 4, 5], [0, 1, 2]))
-	itens_layer3.append_array(random_itens_in_quadrant([3, 4, 5], [3, 4, 5]))
-	itens_layer3.append_array(random_itens_in_quadrant([3, 4, 5], [6, 7, 8]))
-	itens_layer3.append_array(random_itens_in_quadrant([6, 7, 8], [0, 1, 2]))
-	itens_layer3.append_array(random_itens_in_quadrant([6, 7, 8], [3, 4, 5]))
-	itens_layer3.append_array(random_itens_in_quadrant([6, 7, 8], [6, 7, 8]))
+	itens_layer3.append_array(random_itens_in_quadrant([1, 2, 3], [1, 2, 3]))
+	itens_layer3.append_array(random_itens_in_quadrant([1, 2, 3], [5, 6, 7]))
+	itens_layer3.append_array(random_itens_in_quadrant([5, 6, 7], [1, 2, 3]))
+	itens_layer3.append_array(random_itens_in_quadrant([5, 6, 7], [5, 6, 7]))
+	itens_layer3.append_array(random_itens_in_quadrant([4], [1, 2, 3, 4, 5, 6, 7]))
+	itens_layer3.append_array(random_itens_in_quadrant([1, 2, 3, 4, 5, 6, 7], [4]))
+
+
+	itens_layer4.append_array(random_itens_in_quadrant([0, 1, 2], [0, 1, 2]))
+	itens_layer4.append_array(random_itens_in_quadrant([0, 1, 2], [3, 4, 5]))
+	itens_layer4.append_array(random_itens_in_quadrant([0, 1, 2], [6, 7, 8]))
+	itens_layer4.append_array(random_itens_in_quadrant([3, 4, 5], [0, 1, 2]))
+	itens_layer4.append_array(random_itens_in_quadrant([3, 4, 5], [3, 4, 5]))
+	itens_layer4.append_array(random_itens_in_quadrant([3, 4, 5], [6, 7, 8]))
+	itens_layer4.append_array(random_itens_in_quadrant([6, 7, 8], [0, 1, 2]))
+	itens_layer4.append_array(random_itens_in_quadrant([6, 7, 8], [3, 4, 5]))
+	itens_layer4.append_array(random_itens_in_quadrant([6, 7, 8], [6, 7, 8]))
 	
+	
+	itens_layer5.append_array(random_itens_in_quadrant([1, 2, 3], [0, 1, 2]))
+	itens_layer5.append_array(random_itens_in_quadrant([5, 6, 7], [0, 1, 2]))
+	itens_layer5.append_array(random_itens_in_quadrant([1, 2, 3], [3, 4, 5]))
+	itens_layer5.append_array(random_itens_in_quadrant([5, 6, 7], [3, 4, 5]))
+	itens_layer5.append_array(random_itens_in_quadrant([1, 2, 3], [6, 7, 8]))
+	itens_layer5.append_array(random_itens_in_quadrant([5, 6, 7], [6, 7, 8]))
+	
+	print(all_itens)
+
 	
 #	print(itens_layer1)
 	
@@ -847,7 +878,7 @@ func random_itens_in_quadrant(arrayx,arrayy):
 	randomize()
 	var Q1_choose_position
 	Q1_choose_position = Vector2(choose(arrayx), choose(arrayy))
-	while Q1_choose_position == Vector2(2,2):
+	while Q1_choose_position == Vector2(4,4):
 		Q1_choose_position = Vector2(choose(arrayx), choose(arrayy))
 	
 	var object = choose(all_itens)
@@ -865,7 +896,7 @@ func random_itens_in_quadrant(arrayx,arrayy):
 	randomize()
 	var last_Q1_choose_position = Vector2()
 	last_Q1_choose_position = Vector2(choose(arrayx), choose(arrayy))
-	while Q1_choose_position == last_Q1_choose_position or last_Q1_choose_position == Vector2(2,2):
+	while Q1_choose_position == last_Q1_choose_position or last_Q1_choose_position == Vector2(4,4):
 		randomize()
 		last_Q1_choose_position = Vector2(choose(arrayx), choose(arrayy))
 	var last_object = choose(all_itens)
@@ -901,6 +932,18 @@ func hide_layer3_itens():
 	for i in itens_layer3:
 		
 		i[1].position = Vector2(500,500)
+		
+func hide_layer4_itens():
+#	print (itens_layer3.size())
+	for i in itens_layer4:
+		
+		i[1].position = Vector2(500,500)
+
+func hide_layer5_itens():
+#	print (itens_layer3.size())
+	for i in itens_layer5:
+		
+		i[1].position = Vector2(500,500)
 
 func show_layer1_itens():
 #	print (itens_layer1.size())
@@ -917,6 +960,18 @@ func show_layer2_itens():
 func show_layer3_itens():
 #	print (itens_layer3.size())
 	for i in itens_layer3:
+#		
+		i[1].position = i[0] * tile_size + tile_size/Vector2(2,2)
+		
+func show_layer4_itens():
+#	print (itens_layer3.size())
+	for i in itens_layer4:
+#		
+		i[1].position = i[0] * tile_size + tile_size/Vector2(2,2)
+		
+func show_layer5_itens():
+#	print (itens_layer3.size())
+	for i in itens_layer5:
 #		
 		i[1].position = i[0] * tile_size + tile_size/Vector2(2,2)
 		
@@ -959,7 +1014,33 @@ func itens_around():
 						bones_in_sonar_range += 1
 		$HUD/Bomb.text = String(bombs_in_sonar_range)
 		$HUD/Bone.text = String(bones_in_sonar_range)
+	
+	if player_depth == 3:
+		for i in sonar_array:
+			for j in itens_layer4:
+				if i == j[0]:
+					if j[1].is_in_group("bomb"):
+						bombs_in_sonar_range += 1
+#					
+					elif j[1].is_in_group("bones"):
+						bones_in_sonar_range += 1
+		$HUD/Bomb.text = String(bombs_in_sonar_range)
+		$HUD/Bone.text = String(bones_in_sonar_range)
+	
+	if player_depth == 4:
+		for i in sonar_array:
+			for j in itens_layer5:
+				if i == j[0]:
+					if j[1].is_in_group("bomb"):
+						bombs_in_sonar_range += 1
+#					
+					elif j[1].is_in_group("bones"):
+						bones_in_sonar_range += 1
+		$HUD/Bomb.text = String(bombs_in_sonar_range)
+		$HUD/Bone.text = String(bones_in_sonar_range)
 		
+		
+		# COLOCAR AS OUTRAS DUAS CAMADAS!!!!!!!!!!!!!!!!!!! ############################
 func you_loose():
 	end_game = "Loose"
 	$HUD/You_Loose.set_visible(true)

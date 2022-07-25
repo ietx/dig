@@ -70,7 +70,6 @@ animations = [ {
 } ]
 
 [node name="Bomb" type="Area2D" groups=["bomb"]]
-visible = false
 collision_layer = 4
 script = ExtResource( 3 )
 
