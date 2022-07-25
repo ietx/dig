@@ -354,13 +354,13 @@ func _input(event):
 				
 				
 
-		if Input.is_action_just_pressed("dive_up")and player_depth < 2:
+		if Input.is_action_just_pressed("dive_down")and player_depth < 2:
 			$FX/DiveUp.play()
 			can_move = false
 			$Drill.play("Drill_Up")
 			
 	#		player_depth += 1
-		if Input.is_action_just_pressed("dive_down") and player_depth > 0:
+		if Input.is_action_just_pressed("dive_up") and player_depth > 0:
 			$FX/DiveDown.play()
 			can_move = false
 			

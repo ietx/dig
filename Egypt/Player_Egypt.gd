@@ -108,8 +108,9 @@ func _ready():
 
 	pass # Replace with function body.
 func _process(delta):
-	print(can_move)
-	print(player_depth)
+#	print($Layer5.get_cellv(player_position))
+	print(player_position)
+
 	
 	#HUD LAYERS
 	if player_depth == 0:
@@ -369,24 +370,97 @@ func _input(event):
 				
 		
 		#PLAYING DRILL UO AND DOWN ANIMATION
-		if Input.is_action_just_pressed("dive_up")and player_depth < 4:
-			$FX/DiveUp.play()
-			can_move = false
-			$Drill.play("Drill_Up")
+		if Input.is_action_just_pressed("dive_down")and player_depth <= 4:
+			
+			if player_depth == 0:
+				if $Layer2.get_cellv(player_position) == 2:
+					$FX/Not_Available.play()
+				else:
+					$FX/DiveUp.play()
+					can_move = false
+					$Drill.play("Drill_Up")
+			
+			if player_depth == 1:
+				if $Layer3.get_cellv(player_position) == 2:
+					$FX/Not_Available.play()
+				else:
+					$FX/DiveUp.play()
+					can_move = false
+					$Drill.play("Drill_Up")
+					
+			if player_depth == 2:
+				if $Layer4.get_cellv(player_position) == 2:
+					$FX/Not_Available.play()
+				else:
+					$FX/DiveUp.play()
+					can_move = false
+					$Drill.play("Drill_Up")
+			
+			if player_depth == 3:
+				if $Layer5.get_cellv(player_position) == 2:
+					$FX/Not_Available.play()
+				else:
+					$FX/DiveUp.play()
+					can_move = false
+					$Drill.play("Drill_Up")
+			
+			if player_depth == 4:
+				$FX/Not_Available.play()
 			
 	#		player_depth += 1
-		if Input.is_action_just_pressed("dive_down") and player_depth > 0:
-			$FX/DiveDown.play()
-			can_move = false
+		elif Input.is_action_just_pressed("dive_up") and player_depth >= 0:
 			
-			$Drill.play("Drill_Down")
-			player_depth -= 1
+			if player_depth == 0:
+				$FX/Not_Available.play()
+			if player_depth == 1:
+				if $Layer1.get_cellv(player_position) == 2:
+					$FX/Not_Available.play()
+				else:
+					$FX/DiveDown.play()
+					can_move = false
+					$Drill.play("Drill_Down")
+					player_depth -= 1
+					update_sonar()
+					itens_around()
+					check_player_depth()
+					
+			if player_depth == 2:
+				if $Layer2.get_cellv(player_position) == 2:
+					$FX/Not_Available.play()
+				else:
+					$FX/DiveDown.play()
+					can_move = false
+					$Drill.play("Drill_Down")
+					player_depth -= 1
+					update_sonar()
+					itens_around()
+					check_player_depth()
 			
-
-			can_move = true
-			update_sonar()
-			itens_around()
-			check_player_depth()
+			if player_depth == 3:
+				if $Layer3.get_cellv(player_position) == 2:
+					$FX/Not_Available.play()
+				else:
+					$FX/DiveDown.play()
+					can_move = false
+					$Drill.play("Drill_Down")
+					player_depth -= 1
+					update_sonar()
+					itens_around()
+					check_player_depth()
+			
+			if player_depth == 4:
+				if $Layer4.get_cellv(player_position) == 2:
+					$FX/Not_Available.play()
+				else:
+					$FX/DiveDown.play()
+					can_move = false
+					$Drill.play("Drill_Down")
+					player_depth -= 1
+					update_sonar()
+					itens_around()
+					check_player_depth()
+		
+		
 		
 		#CHANGE LAYER MECANISM: HIDE ITENS AND OTHER LAYERS
 #			if player_depth == 0:
@@ -618,6 +692,7 @@ func _on_Drill_animation_finished():
 		$Drill.play("Drill")
 		$Drill.set_frame(0)
 		$Drill.stop()
+		can_move = true
 		
 	if $Drill.get_animation() == "Drill_Up":
 		$Drill.play("Drill")
