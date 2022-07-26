@@ -29,9 +29,20 @@ var all_itens = []
 var score = 0
 var life = 3
 
-onready var bomb_scene = preload("res://Bomb.tscn")
-onready var ribs_scene = preload("res://Ribs.tscn")
-onready var leg_scene = preload("res://Leg.tscn")
+onready var bomb_scene = preload("res://Egypt/Escaravelho_Bomb.tscn")
+onready var ra_scene = preload("res://Egypt/Artefacts/Ra.tscn")
+onready var gato_scene = preload("res://Egypt/Artefacts/Gato.tscn")
+onready var bastao_scene = preload("res://Egypt/Artefacts/Bastao.tscn")
+onready var anubis_scene = preload("res://Egypt/Artefacts/Anubis.tscn")
+onready var coin_scene = preload("res://Egypt/Artefacts/Coin.tscn")
+onready var escara_good_scene = preload("res://Egypt/Artefacts/Escaravelho_Good.tscn")
+onready var garca_scene = preload("res://Egypt/Artefacts/Garca.tscn")
+onready var stone_scene = preload("res://Egypt/Artefacts/Stone.tscn")
+
+
+
+
+
 onready var arm_scene = preload("res://Arm.tscn")
 onready var head_scene = preload("res://Head.tscn")
 onready var claw_scene = preload("res://Claw.tscn")
@@ -70,28 +81,27 @@ func _ready():
 		add_child(b)
 		all_itens.append(b)
 	
-	var rib = ribs_scene.instance()
-	add_child(rib)
-	var leg = leg_scene.instance()
-	add_child(leg)
-	var leg2 = leg_scene.instance()
-	add_child(leg2)
-	var arm = arm_scene.instance()
-	add_child(arm)
-	var arm2 = arm_scene.instance()
-	add_child(arm2)
-	var head = head_scene.instance()
-	add_child(head)
-	var claw = claw_scene.instance()
-	add_child(claw)
-	var claw2 = claw_scene.instance()
-	add_child(claw2)
-	var single_bone = single_bone_scene.instance()
-	add_child(single_bone)
-	var single_bone2 = single_bone_scene.instance()
-	add_child(single_bone2)
+	var ra = ra_scene.instance()
+	add_child(ra)
+	var anubis = anubis_scene.instance()
+	add_child(anubis)
+	var bastao = bastao_scene.instance()
+	add_child(bastao)
+	var coin = coin_scene.instance()
+	add_child(coin)
+	var escara_good = escara_good_scene.instance()
+	add_child(escara_good)
+	var garca = garca_scene.instance()
+	add_child(garca)
+	var gato = gato_scene.instance()
+	add_child(gato)
+	var stone = stone_scene.instance()
+	add_child(stone)
 	
-	all_itens.append_array([rib, leg, leg2, arm, arm2, head, claw, claw2, single_bone, single_bone2])
+	
+
+	
+	all_itens.append_array([ra, anubis, bastao, coin, escara_good, garca, gato, stone])
 #	print(all_itens.size())
 	
 		
@@ -123,6 +133,10 @@ func _process(delta):
 		$HUD/Floors.play("Floor2")
 	if player_depth == 2:
 		$HUD/Floors.play("Floor3")
+	if player_depth == 3:
+		$HUD/Floors.play("Floor4")
+	if player_depth == 4:
+		$HUD/Floors.play("Floor5")
 		
 	if pica_using_times <= 0:
 		

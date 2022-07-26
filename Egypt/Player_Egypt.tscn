@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=2]
+[gd_scene load_steps=119 format=2]
 
 [ext_resource path="res://Egypt/Player_Egypt.gd" type="Script" id=1]
 [ext_resource path="res://player.png" type="Texture" id=2]
@@ -26,10 +26,10 @@
 [ext_resource path="res://Assets/Menus/Win_Menu/Win_Menu3.png" type="Texture" id=24]
 [ext_resource path="res://Assets/Radar/Radar.png" type="Texture" id=25]
 [ext_resource path="res://Assets/Picareta/DIG_Picareta.png" type="Texture" id=26]
-[ext_resource path="res://Assets/HUB/DIG_Hub_BASE.png" type="Texture" id=27]
-[ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level1.png" type="Texture" id=28]
-[ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level2.png" type="Texture" id=29]
-[ext_resource path="res://Assets/HUB/DIG_Hub_Floor_Level3.png" type="Texture" id=30]
+[ext_resource path="res://Assets_2/HUB/DIG_Hub_EGYPT_Andares1.png" type="Texture" id=27]
+[ext_resource path="res://Assets_2/HUB/DIG_Hub_EGYPT_Andares3.png" type="Texture" id=28]
+[ext_resource path="res://Assets_2/HUB/DIG_Hub_EGYPT_Andares2.png" type="Texture" id=29]
+[ext_resource path="res://Assets_2/HUB/DIG_Hub_EGYPT_Andares4.png" type="Texture" id=30]
 [ext_resource path="res://Assets/HUB/DIG_Hub_Tool2.png" type="Texture" id=31]
 [ext_resource path="res://Assets/HUB/DIG_Hub_Tool1.png" type="Texture" id=32]
 [ext_resource path="res://Assets/Sounds/Fx/Drill.wav" type="AudioStream" id=33]
@@ -47,6 +47,8 @@
 [ext_resource path="res://Assets_2/Tiles_Piso/Dig_Egito_Base_Floor_2_Tile.png" type="Texture" id=45]
 [ext_resource path="res://Assets_2/Tiles_Piso/Dig_Egito_Top_Floor_3_Tile.png" type="Texture" id=46]
 [ext_resource path="res://Assets_2/Tiles_Piso/Dig_Egito_Base_Floor_3_Tile.png" type="Texture" id=47]
+[ext_resource path="res://Assets_2/HUB/DIG_Hub_EGYPT_Andares5.png" type="Texture" id=48]
+[ext_resource path="res://Assets_2/HUB/DIG_Hub_EGYPT_Base.png" type="Texture" id=49]
 
 [sub_resource type="TileSet" id=68]
 0/name = "Dig_Egito_Top_Floor_5_Tile.png 0"
@@ -439,30 +441,6 @@ animations = [ {
 1/shapes = [  ]
 1/z_index = 0
 
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 15 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 15 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 15 )
-region = Rect2( 32, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 15 )
-region = Rect2( 48, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 15 )
-region = Rect2( 64, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 15 )
-region = Rect2( 80, 0, 16, 16 )
-
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 16, 16 )
@@ -511,13 +489,32 @@ region = Rect2( 64, 0, 16, 16 )
 atlas = ExtResource( 8 )
 region = Rect2( 80, 0, 16, 16 )
 
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 15 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 15 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 15 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 15 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 15 )
+region = Rect2( 80, 0, 16, 16 )
+
 [sub_resource type="SpriteFrames" id=18]
 animations = [ {
-"frames": [ ExtResource( 9 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
-"loop": false,
-"name": "Crack3",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 9 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
 "loop": false,
 "name": "Crack2",
@@ -526,6 +523,11 @@ animations = [ {
 "frames": [ ExtResource( 9 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": false,
 "name": "Crack1",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 9 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
+"loop": false,
+"name": "Crack3",
 "speed": 12.0
 } ]
 
@@ -614,19 +616,29 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=66]
 animations = [ {
+"frames": [ ExtResource( 28 ) ],
+"loop": false,
+"name": "Floor3",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 29 ) ],
 "loop": false,
 "name": "Floor2",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 30 ) ],
-"loop": false,
-"name": "Floor3",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 28 ) ],
+"frames": [ ExtResource( 27 ) ],
 "loop": false,
 "name": "Floor1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 30 ) ],
+"loop": true,
+"name": "Floor4",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 48 ) ],
+"loop": true,
+"name": "Floor5",
 "speed": 5.0
 } ]
 
@@ -711,7 +723,7 @@ animation = "Crack3"
 
 [node name="Pica" type="AnimatedSprite" parent="."]
 frames = SubResource( 64 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="HUD" type="Control" parent="."]
@@ -723,7 +735,7 @@ __meta__ = {
 
 [node name="HUD_Base" type="Sprite" parent="HUD"]
 position = Vector2( 144, 0 )
-texture = ExtResource( 27 )
+texture = ExtResource( 49 )
 centered = false
 
 [node name="Bomb" type="Label" parent="HUD"]
@@ -801,9 +813,9 @@ frames = SubResource( 50 )
 animation = "Menu"
 
 [node name="Floors" type="AnimatedSprite" parent="HUD"]
-position = Vector2( 151, 0 )
+position = Vector2( 144, 0 )
 frames = SubResource( 66 )
-animation = "Floor2"
+animation = "Floor5"
 centered = false
 
 [node name="Tool" type="AnimatedSprite" parent="HUD"]
