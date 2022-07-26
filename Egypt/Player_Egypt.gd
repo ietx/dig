@@ -41,13 +41,6 @@ onready var stone_scene = preload("res://Egypt/Artefacts/Stone.tscn")
 
 
 
-
-
-onready var arm_scene = preload("res://Arm.tscn")
-onready var head_scene = preload("res://Head.tscn")
-onready var claw_scene = preload("res://Claw.tscn")
-onready var single_bone_scene = preload("res://Single_Bone.tscn")
-
 var itens_layer1 = []
 var itens_layer2 = []
 var itens_layer3 = []
@@ -89,6 +82,8 @@ func _ready():
 	add_child(bastao)
 	var coin = coin_scene.instance()
 	add_child(coin)
+	var coin2 = coin_scene.instance()
+	add_child(coin2)
 	var escara_good = escara_good_scene.instance()
 	add_child(escara_good)
 	var garca = garca_scene.instance()
@@ -101,7 +96,7 @@ func _ready():
 	
 
 	
-	all_itens.append_array([ra, anubis, bastao, coin, escara_good, garca, gato, stone])
+	all_itens.append_array([ra, anubis, bastao, coin, coin2, escara_good, garca, gato, stone])
 #	print(all_itens.size())
 	
 		
