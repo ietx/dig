@@ -310,30 +310,6 @@ region = Rect2( 64, 0, 16, 16 )
 atlas = ExtResource( 5 )
 region = Rect2( 80, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 16 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 16 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 16 )
-region = Rect2( 32, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 16 )
-region = Rect2( 48, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 16 )
-region = Rect2( 64, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=38]
-atlas = ExtResource( 16 )
-region = Rect2( 80, 0, 16, 16 )
-
 [sub_resource type="AtlasTexture" id=39]
 atlas = ExtResource( 17 )
 region = Rect2( 0, 0, 16, 16 )
@@ -358,6 +334,30 @@ region = Rect2( 64, 0, 16, 16 )
 atlas = ExtResource( 17 )
 region = Rect2( 80, 0, 16, 16 )
 
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 16 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 16 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=35]
+atlas = ExtResource( 16 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=36]
+atlas = ExtResource( 16 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=37]
+atlas = ExtResource( 16 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 16 )
+region = Rect2( 80, 0, 16, 16 )
+
 [sub_resource type="SpriteFrames" id=10]
 animations = [ {
 "frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
@@ -365,14 +365,14 @@ animations = [ {
 "name": "Drill",
 "speed": 12.0
 }, {
-"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
-"loop": false,
-"name": "Drill_Down",
-"speed": 12.0
-}, {
 "frames": [ SubResource( 39 ), SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
 "loop": true,
 "name": "Drill_Up",
+"speed": 12.0
+}, {
+"frames": [ SubResource( 33 ), SubResource( 34 ), SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ) ],
+"loop": false,
+"name": "Drill_Down",
 "speed": 12.0
 } ]
 
@@ -580,9 +580,9 @@ font_data = ExtResource( 18 )
 
 [sub_resource type="SpriteFrames" id=49]
 animations = [ {
-"frames": [ ExtResource( 22 ) ],
+"frames": [ ExtResource( 19 ) ],
 "loop": true,
-"name": "Retry",
+"name": "Menu",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 21 ) ],
@@ -590,17 +590,17 @@ animations = [ {
 "name": "Quit",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 19 ) ],
+"frames": [ ExtResource( 22 ) ],
 "loop": true,
-"name": "Menu",
+"name": "Retry",
 "speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=50]
 animations = [ {
-"frames": [ ExtResource( 20 ) ],
+"frames": [ ExtResource( 23 ) ],
 "loop": true,
-"name": "Retry",
+"name": "Menu",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 24 ) ],
@@ -608,9 +608,9 @@ animations = [ {
 "name": "Quit",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 23 ) ],
+"frames": [ ExtResource( 20 ) ],
 "loop": true,
-"name": "Menu",
+"name": "Retry",
 "speed": 5.0
 } ]
 
@@ -619,11 +619,6 @@ animations = [ {
 "frames": [ ExtResource( 28 ) ],
 "loop": false,
 "name": "Floor3",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 30 ) ],
-"loop": true,
-"name": "Floor4",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 29 ) ],
@@ -636,6 +631,11 @@ animations = [ {
 "name": "Floor1",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 30 ) ],
+"loop": true,
+"name": "Floor4",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 48 ) ],
 "loop": true,
 "name": "Floor5",
@@ -644,14 +644,14 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=67]
 animations = [ {
-"frames": [ ExtResource( 32 ) ],
-"loop": true,
-"name": "Drill",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 31 ) ],
 "loop": true,
 "name": "Pica",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 32 ) ],
+"loop": true,
+"name": "Drill",
 "speed": 5.0
 } ]
 
@@ -662,7 +662,7 @@ script = ExtResource( 1 )
 tile_set = SubResource( 68 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 0, 2, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 2, 0, 65536, 2, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 2, 0, 131072, 2, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 2, 0, 196608, 2, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 2, 0, 262144, 2, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 2, 0, 327680, 2, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 2, 0, 393216, 2, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 2, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 2, 0, 458752, 2, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 2, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 2, 0, 524288, 2, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 2, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 2, 0 )
+tile_data = PoolIntArray( -655360, 2, 0, -655359, 2, 0, -655358, 2, 0, -655357, 0, 0, -655356, 0, 0, -655355, 0, 0, -655354, 2, 0, -655353, 2, 0, -655352, 2, 0, -589824, 2, 0, -589823, 2, 0, -589822, 2, 0, -589821, 0, 0, -589820, 0, 0, -589819, 0, 0, -589818, 2, 0, -589817, 2, 0, -589816, 2, 0, -524288, 2, 0, -524287, 2, 0, -524286, 2, 0, -524285, 0, 0, -524284, 0, 0, -524283, 0, 0, -524282, 2, 0, -524281, 2, 0, -524280, 2, 0, -458752, 2, 0, -458751, 2, 0, -458750, 2, 0, -458749, 0, 0, -458748, 0, 0, -458747, 0, 0, -458746, 2, 0, -458745, 2, 0, -458744, 2, 0, -393216, 2, 0, -393215, 2, 0, -393214, 2, 0, -393213, 0, 0, -393212, 0, 0, -393211, 0, 0, -393210, 2, 0, -393209, 2, 0, -393208, 2, 0, -327680, 2, 0, -327679, 2, 0, -327678, 2, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 2, 0, -327673, 2, 0, -327672, 2, 0, -262144, 2, 0, -262143, 2, 0, -262142, 2, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -262138, 2, 0, -262137, 2, 0, -262136, 2, 0, -196608, 2, 0, -196607, 2, 0, -196606, 2, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 2, 0, -196601, 2, 0, -196600, 2, 0, -131072, 2, 0, -131071, 2, 0, -131070, 2, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 2, 0, -131065, 2, 0, -131064, 2, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 0, -65533, 2, 0, -65532, 0, 0, -65531, 2, 0, -65530, 2, 0, -65529, 2, 0, -65528, 2, 0, 0, 2, 0, 1, 0, 0, 2, 0, 0, 3, 2, 0, 4, 0, 0, 5, 2, 0, 6, 0, 0, 7, 0, 0, 8, 2, 0, 65536, 2, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 2, 0, 131072, 2, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 2, 0, 196608, 2, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 2, 0, 262144, 2, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 2, 0, 327680, 2, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 2, 0, 393216, 2, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 2, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 2, 0, 458752, 2, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 2, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 2, 0, 524288, 2, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 2, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 2, 0 )
 
 [node name="Layer4" type="TileMap" parent="."]
 tile_set = SubResource( 69 )
@@ -708,7 +708,7 @@ shape = SubResource( 32 )
 [node name="Sonar" type="AnimatedSprite" parent="Drill"]
 frames = SubResource( 57 )
 animation = "On"
-frame = 4
+frame = 3
 playing = true
 
 [node name="Player_Tile_Center" type="Position2D" parent="."]
@@ -724,7 +724,6 @@ animation = "Crack3"
 
 [node name="Pica" type="AnimatedSprite" parent="."]
 frames = SubResource( 64 )
-frame = 1
 playing = true
 
 [node name="HUD" type="Control" parent="."]
