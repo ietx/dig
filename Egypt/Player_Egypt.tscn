@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=2]
+[gd_scene load_steps=128 format=2]
 
 [ext_resource path="res://Egypt/Player_Egypt.gd" type="Script" id=1]
 [ext_resource path="res://player.png" type="Texture" id=2]
@@ -49,6 +49,12 @@
 [ext_resource path="res://Assets_2/Tiles_Piso/Dig_Egito_Base_Floor_3_Tile.png" type="Texture" id=47]
 [ext_resource path="res://Assets_2/HUB/DIG_Hub_EGYPT_Andares5.png" type="Texture" id=48]
 [ext_resource path="res://Assets_2/HUB/DIG_Hub_EGYPT_Base.png" type="Texture" id=49]
+[ext_resource path="res://Assets_2/Botão/Dig_Egito_Pilar_GREEN.png" type="Texture" id=50]
+[ext_resource path="res://Assets_2/Botão/Dig_Egito_Pilar_RED.png" type="Texture" id=51]
+[ext_resource path="res://Assets_2/Botão/Portão1.png" type="Texture" id=52]
+[ext_resource path="res://Assets_2/Botão/Portão2.png" type="Texture" id=53]
+[ext_resource path="res://Assets_2/Botão/Dig_Egito_Botão_1.png" type="Texture" id=54]
+[ext_resource path="res://Assets_2/Botão/Dig_Egito_Botão_2.png" type="Texture" id=55]
 
 [sub_resource type="TileSet" id=68]
 0/name = "Dig_Egito_Top_Floor_5_Tile.png 0"
@@ -93,6 +99,63 @@
 2/shape_one_way_margin = 0.0
 2/shapes = [  ]
 2/z_index = 0
+3/name = "Dig_Egito_Pilar_GREEN.png 3"
+3/texture = ExtResource( 50 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 0, 16, 16 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape_one_way = false
+3/shape_one_way_margin = 0.0
+3/shapes = [  ]
+3/z_index = 0
+4/name = "Dig_Egito_Pilar_RED.png 4"
+4/texture = ExtResource( 51 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 0, 0, 16, 16 )
+4/tile_mode = 0
+4/occluder_offset = Vector2( 0, 0 )
+4/navigation_offset = Vector2( 0, 0 )
+4/shape_offset = Vector2( 0, 0 )
+4/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+4/shape_one_way = false
+4/shape_one_way_margin = 0.0
+4/shapes = [  ]
+4/z_index = 0
+
+[sub_resource type="SpriteFrames" id=71]
+animations = [ {
+"frames": [ ExtResource( 55 ) ],
+"loop": true,
+"name": "ButtonDown",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 54 ) ],
+"loop": true,
+"name": "ButtonUp",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=72]
+extents = Vector2( 6, 6 )
+
+[sub_resource type="SpriteFrames" id=70]
+animations = [ {
+"frames": [ ExtResource( 52 ) ],
+"loop": true,
+"name": "Close",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 53 ) ],
+"loop": true,
+"name": "Open",
+"speed": 5.0
+} ]
 
 [sub_resource type="TileSet" id=69]
 0/name = "Dig_Egito_Top_Floor_4_Tile.png 0"
@@ -441,28 +504,28 @@ animations = [ {
 1/shapes = [  ]
 1/z_index = 0
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 12 )
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 15 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 12 )
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 15 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 12 )
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 15 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 12 )
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 15 )
 region = Rect2( 48, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 12 )
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 15 )
 region = Rect2( 64, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 12 )
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 15 )
 region = Rect2( 80, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=12]
@@ -489,35 +552,35 @@ region = Rect2( 64, 0, 16, 16 )
 atlas = ExtResource( 8 )
 region = Rect2( 80, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 15 )
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 15 )
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 12 )
 region = Rect2( 16, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 15 )
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 12 )
 region = Rect2( 32, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 15 )
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 12 )
 region = Rect2( 48, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 15 )
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 12 )
 region = Rect2( 64, 0, 16, 16 )
 
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 15 )
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 12 )
 region = Rect2( 80, 0, 16, 16 )
 
 [sub_resource type="SpriteFrames" id=18]
 animations = [ {
-"frames": [ ExtResource( 9 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
+"frames": [ ExtResource( 9 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
 "loop": false,
-"name": "Crack2",
+"name": "Crack3",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 9 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
@@ -525,9 +588,9 @@ animations = [ {
 "name": "Crack1",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 9 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ) ],
+"frames": [ ExtResource( 9 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ],
 "loop": false,
-"name": "Crack3",
+"name": "Crack2",
 "speed": 12.0
 } ]
 
@@ -580,11 +643,6 @@ font_data = ExtResource( 18 )
 
 [sub_resource type="SpriteFrames" id=49]
 animations = [ {
-"frames": [ ExtResource( 19 ) ],
-"loop": true,
-"name": "Menu",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 21 ) ],
 "loop": true,
 "name": "Quit",
@@ -594,15 +652,15 @@ animations = [ {
 "loop": true,
 "name": "Retry",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ) ],
+"loop": true,
+"name": "Menu",
+"speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=50]
 animations = [ {
-"frames": [ ExtResource( 23 ) ],
-"loop": true,
-"name": "Menu",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 24 ) ],
 "loop": true,
 "name": "Quit",
@@ -611,6 +669,11 @@ animations = [ {
 "frames": [ ExtResource( 20 ) ],
 "loop": true,
 "name": "Retry",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 23 ) ],
+"loop": true,
+"name": "Menu",
 "speed": 5.0
 } ]
 
@@ -621,9 +684,9 @@ animations = [ {
 "name": "Floor3",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 29 ) ],
-"loop": false,
-"name": "Floor2",
+"frames": [ ExtResource( 48 ) ],
+"loop": true,
+"name": "Floor5",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 27 ) ],
@@ -636,9 +699,9 @@ animations = [ {
 "name": "Floor4",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 48 ) ],
-"loop": true,
-"name": "Floor5",
+"frames": [ ExtResource( 29 ) ],
+"loop": false,
+"name": "Floor2",
 "speed": 5.0
 } ]
 
@@ -662,7 +725,32 @@ script = ExtResource( 1 )
 tile_set = SubResource( 68 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( -655360, 2, 0, -655359, 2, 0, -655358, 2, 0, -655357, 0, 0, -655356, 0, 0, -655355, 0, 0, -655354, 2, 0, -655353, 2, 0, -655352, 2, 0, -589824, 2, 0, -589823, 2, 0, -589822, 2, 0, -589821, 0, 0, -589820, 0, 0, -589819, 0, 0, -589818, 2, 0, -589817, 2, 0, -589816, 2, 0, -524288, 2, 0, -524287, 2, 0, -524286, 2, 0, -524285, 0, 0, -524284, 0, 0, -524283, 0, 0, -524282, 2, 0, -524281, 2, 0, -524280, 2, 0, -458752, 2, 0, -458751, 2, 0, -458750, 2, 0, -458749, 0, 0, -458748, 0, 0, -458747, 0, 0, -458746, 2, 0, -458745, 2, 0, -458744, 2, 0, -393216, 2, 0, -393215, 2, 0, -393214, 2, 0, -393213, 0, 0, -393212, 0, 0, -393211, 0, 0, -393210, 2, 0, -393209, 2, 0, -393208, 2, 0, -327680, 2, 0, -327679, 2, 0, -327678, 2, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 2, 0, -327673, 2, 0, -327672, 2, 0, -262144, 2, 0, -262143, 2, 0, -262142, 2, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -262138, 2, 0, -262137, 2, 0, -262136, 2, 0, -196608, 2, 0, -196607, 2, 0, -196606, 2, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 2, 0, -196601, 2, 0, -196600, 2, 0, -131072, 2, 0, -131071, 2, 0, -131070, 2, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 2, 0, -131065, 2, 0, -131064, 2, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 0, -65533, 2, 0, -65532, 0, 0, -65531, 2, 0, -65530, 2, 0, -65529, 2, 0, -65528, 2, 0, 0, 2, 0, 1, 0, 0, 2, 0, 0, 3, 2, 0, 4, 0, 0, 5, 2, 0, 6, 0, 0, 7, 0, 0, 8, 2, 0, 65536, 2, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 2, 0, 131072, 2, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 2, 0, 196608, 2, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 2, 0, 262144, 2, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 2, 0, 327680, 2, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 2, 0, 393216, 2, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 2, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 2, 0, 458752, 2, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 2, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 2, 0, 524288, 2, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 2, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 2, 0 )
+tile_data = PoolIntArray( -655360, 2, 0, -655359, 2, 0, -655358, 2, 0, -655357, 0, 0, -655356, 0, 0, -655355, 0, 0, -655354, 2, 0, -655353, 2, 0, -655352, 2, 0, -589824, 2, 0, -589823, 2, 0, -589822, 2, 0, -589821, 0, 0, -589820, 0, 0, -589819, 0, 0, -589818, 2, 0, -589817, 2, 0, -589816, 2, 0, -524288, 2, 0, -524287, 2, 0, -524286, 2, 0, -524285, 0, 0, -524284, 0, 0, -524283, 0, 0, -524282, 2, 0, -524281, 2, 0, -524280, 2, 0, -458752, 2, 0, -458751, 2, 0, -458750, 2, 0, -458749, 0, 0, -458748, 0, 0, -458747, 0, 0, -458746, 2, 0, -458745, 2, 0, -458744, 2, 0, -393216, 2, 0, -393215, 2, 0, -393214, 2, 0, -393213, 0, 0, -393212, 0, 0, -393211, 0, 0, -393210, 2, 0, -393209, 2, 0, -393208, 2, 0, -327680, 2, 0, -327679, 2, 0, -327678, 2, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 2, 0, -327673, 2, 0, -327672, 2, 0, -262144, 2, 0, -262143, 2, 0, -262142, 2, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -262138, 2, 0, -262137, 2, 0, -262136, 2, 0, -196608, 2, 0, -196607, 2, 0, -196606, 2, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 2, 0, -196601, 2, 0, -196600, 2, 0, -131072, 2, 0, -131071, 2, 0, -131070, 2, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 2, 0, -131065, 2, 0, -131064, 2, 0, -65536, 2, 0, -65535, 2, 0, -65534, 2, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 2, 0, -65529, 2, 0, -65528, 2, 0, 0, 2, 0, 1, 2, 0, 2, 4, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 4, 0, 7, 2, 0, 8, 2, 0, 65536, 2, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 2, 0, 131072, 2, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 2, 0, 196608, 2, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 2, 0, 262144, 2, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 2, 0, 327680, 2, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 2, 0, 393216, 2, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 2, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 2, 0, 458752, 2, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 2, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 2, 0, 524288, 2, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 2, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 2, 0 )
+
+[node name="Button1" type="Area2D" parent="Layer5" groups=["Button"]]
+position = Vector2( 104, 56 )
+
+[node name="Sprite" type="AnimatedSprite" parent="Layer5/Button1"]
+frames = SubResource( 71 )
+animation = "ButtonUp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Layer5/Button1"]
+shape = SubResource( 72 )
+
+[node name="Button2" type="Area2D" parent="Layer5" groups=["Button"]]
+position = Vector2( 40, 88 )
+
+[node name="Sprite" type="AnimatedSprite" parent="Layer5/Button2"]
+frames = SubResource( 71 )
+animation = "ButtonUp"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Layer5/Button2"]
+shape = SubResource( 72 )
+
+[node name="Gate" type="AnimatedSprite" parent="Layer5"]
+frames = SubResource( 70 )
+animation = "Close"
+offset = Vector2( 72, 8 )
 
 [node name="Layer4" type="TileMap" parent="."]
 tile_set = SubResource( 69 )
@@ -708,7 +796,7 @@ shape = SubResource( 32 )
 [node name="Sonar" type="AnimatedSprite" parent="Drill"]
 frames = SubResource( 57 )
 animation = "On"
-frame = 3
+frame = 5
 playing = true
 
 [node name="Player_Tile_Center" type="Position2D" parent="."]
@@ -724,6 +812,7 @@ animation = "Crack3"
 
 [node name="Pica" type="AnimatedSprite" parent="."]
 frames = SubResource( 64 )
+frame = 4
 playing = true
 
 [node name="HUD" type="Control" parent="."]
@@ -882,6 +971,8 @@ autoplay = true
 wait_time = 3.0
 one_shot = true
 
+[connection signal="area_entered" from="Layer5/Button1" to="." method="_on_Button1_area_entered"]
+[connection signal="area_entered" from="Layer5/Button2" to="." method="_on_Button2_area_entered"]
 [connection signal="animation_finished" from="Drill" to="." method="_on_Drill_animation_finished"]
 [connection signal="area_entered" from="Drill/Drill_Hit_Area" to="." method="_on_Drill_Hit_Area_area_entered"]
 [connection signal="animation_finished" from="Tile_Crack" to="." method="_on_Tile_Crack_animation_finished"]

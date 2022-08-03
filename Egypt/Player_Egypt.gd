@@ -1,5 +1,7 @@
 extends Node2D
 
+var buttons_pressed = 0
+
 var cursor_you_loose = 0 
 
 var can_move = true
@@ -256,7 +258,7 @@ func _input(event):
 				direction = Vector2(-1,0)
 				move_player()
 			
-			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == -1 or depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 2:
+			else:
 				can_move = true
 				$FX/Not_Available.play()
 			
@@ -296,7 +298,7 @@ func _input(event):
 				direction = Vector2(1,0)
 				move_player()
 			
-			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == -1 or depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 2:
+			else:
 				can_move = true
 				$FX/Not_Available.play()
 
@@ -335,7 +337,7 @@ func _input(event):
 				$FX/DriveAround.play()
 				direction = Vector2(0, -1)
 				move_player()
-			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == -1 or depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 2:
+			else:
 				can_move = true
 				$FX/Not_Available.play()
 				
@@ -376,7 +378,7 @@ func _input(event):
 				$FX/DriveAround.play()
 				direction = Vector2(0, 1)
 				move_player()
-			elif depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == -1 or depth_layer_node.get_cell(aim_tile.x, aim_tile.y) == 2:
+			else:
 				can_move = true
 				$FX/Not_Available.play()
 				
@@ -826,6 +828,18 @@ func _on_Drill_Hit_Area_area_entered(area):
 	if area.is_in_group("bomb"):
 		life -= 1
 		$HUD/Lifes.text = String(life)
+		
+	if area.name == "Button1":
+		$Layer5/Button1/Sprite.play("ButtonDown")
+		$Layer5.set_cell(2, 0, 3)
+		button_down()
+		
+	
+	if area.name == "Button2":
+		$Layer5/Button2/Sprite.play("ButtonDown")
+		$Layer5.set_cell(6, 0, 3)
+		button_down()
+		
 
 func choose(array):
 	return array[randi() % array.size()]	
@@ -863,8 +877,8 @@ func randomize_itens_in_matrix():
 	itens_layer4.append_array(random_itens_in_quadrant([6, 7, 8], [6, 7, 8]))
 	
 	
-	itens_layer5.append_array(random_itens_in_quadrant([1, 2, 3], [0, 1, 2]))
-	itens_layer5.append_array(random_itens_in_quadrant([5, 6, 7], [0, 1, 2]))
+	itens_layer5.append_array(random_itens_in_quadrant([1, 2, 3], [1, 2]))
+	itens_layer5.append_array(random_itens_in_quadrant([5, 6, 7], [1, 2]))
 	itens_layer5.append_array(random_itens_in_quadrant([1, 2, 3], [3, 4, 5]))
 	itens_layer5.append_array(random_itens_in_quadrant([5, 6, 7], [3, 4, 5]))
 	itens_layer5.append_array(random_itens_in_quadrant([1, 2, 3], [6, 7, 8]))
@@ -983,6 +997,7 @@ func show_layer5_itens():
 	for i in itens_layer5:
 #		
 		i[1].position = i[0] * tile_size + tile_size/Vector2(2,2)
+		print(i[0])
 		
 func itens_around():
 	if player_depth == 0:
@@ -1068,3 +1083,19 @@ func _on_Radar_finished():
 
 func _on_Timer_timeout():
 	$FX/Radar.play()
+
+func button_down():
+	buttons_pressed += 1
+	if buttons_pressed == 2:
+		$Layer5.set_cell(4, 0, 1)
+		$Layer5/Gate.play("Open")
+
+func spawn_button1():
+	var button_x = choose([1,2,3])
+	var button_y = choose([1,2,3,4,5,6,7,8])
+	
+	for i in itens_layer5:
+		if i[2].x == button_x:
+			randomize()
+	
+		
